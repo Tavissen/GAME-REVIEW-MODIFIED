@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+            --accent-glow: 0 0 20px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 42, 109, 0.03) 0%, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        /* Particle Background Effect */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 243, 255, 0.1);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 5px;
+            box-shadow: var(--accent-glow) rgba(0, 243, 255, 0.3);
+        }
+        
+        /* Navigation */
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cyber-nav.scrolled {
+            padding: 0.5rem 0;
+            border-bottom: 2px solid var(--neon-pink);
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+            position: relative;
+            padding-right: 10px;
+        }
+        
+        .nav-brand::after {
+            content: '▮';
+            color: var(--neon-blue);
+            position: absolute;
+            right: 0;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem !important;
+            margin: 0 0.25rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--neon-blue) !important;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            border-left: 2px solid var(--neon-blue);
+            border-right: 2px solid var(--neon-blue);
+        }
+        
+        /* Hero Section */
+        .cyber-hero {
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(185, 103, 255, 0.5);
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translateX(0); }
+            92% { transform: translateX(0); }
+            94% { transform: translateX(-2px); }
+            96% { transform: translateX(2px); }
+            98% { transform: translateX(-1px); }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .hero-subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+        
+        /* Cyber Button */
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        /* Cyber Card */
+        .cyber-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .cyber-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .cyber-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
+                        0 0 0 1px rgba(0, 243, 255, 0.3),
+                        0 0 30px rgba(185, 103, 255, 0.2);
+        }
+        
+        .cyber-card-img {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.6s ease;
+        }
+        
+        .cyber-card:hover .cyber-card-img {
+            transform: scale(1.1);
+        }
+        
+        .card-rating {
+            font-size: 1.2rem;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Section Headers */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .section-title h2::before,
+        .section-title h2::after {
+            content: '◈';
+            color: var(--neon-blue);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+        
+        .section-title h2::before { left: -10px; }
+        .section-title h2::after { right: -10px; }
+        
+        /* Video Container */
+        .cyber-video {
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cyber-video::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            z-index: -1;
+            border-radius: 17px;
+            animation: rotate 3s linear infinite;
+            background-size: 400% 400%;
+        }
+        
+        @keyframes rotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+        
+        /* Table Styling */
+        .cyber-table {
+            background: rgba(19, 19, 32, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .cyber-table thead {
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.2), rgba(185, 103, 255, 0.2));
+        }
+        
+        .cyber-table th {
+            color: var(--neon-blue);
+            font-weight: 600;
+            border-bottom: 2px solid var(--neon-purple);
+        }
+        
+        .cyber-table td {
+            color: var(--text-secondary);
+            border-color: rgba(0, 243, 255, 0.1);
+        }
+        
+        .cyber-table tr:hover {
+            background: rgba(0, 243, 255, 0.05);
+        }
+        
+        /* List Group */
+        .cyber-list {
+            background: transparent;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        
+        .cyber-list-item {
+            background: rgba(19, 19, 32, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-list-item::before {
+            content: '▶';
+            color: var(--neon-blue);
+            position: absolute;
+            left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-list-item:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .cyber-list-item:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--neon-blue);
+            transform: translateX(10px);
+            color: var(--text-primary);
+        }
+        
+        /* Search Box */
+        .cyber-search {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-search:focus {
+            background: rgba(19, 19, 32, 0.9);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+        
+        /* Footer */
+        .cyber-footer {
+            background: rgba(10, 10, 15, 0.95);
+            border-top: 2px solid rgba(0, 243, 255, 0.3);
+            margin-top: 100px;
+            position: relative;
+        }
+        
+        .cyber-footer::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), var(--neon-blue), transparent);
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--neon-blue);
+        }
+        
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Utility Classes */
+        .text-glow {
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .border-glow {
+            box-shadow: 0 0 15px currentColor;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 243, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .cyber-hero {
+                padding: 150px 0 60px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .cyber-loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--neon-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+        
+        .cyber-loader::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--neon-purple);
+            border-radius: 50%;
+            animation: spin 0.5s linear infinite reverse;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="cyber-loader"></div>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="cyberNav">
+                <ul class="navbar-nav me-auto ms-4">
+                    <li class="nav-item">
+                        <a class="nav-link active cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <input class="form-control cyber-search me-3" type="search" placeholder="SEARCH GAMES..." aria-label="Search">
+                    <button class="btn cyber-btn cyber-font" id="searchBtn">GO</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="cyber-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="hero-title cyber-font">Honest Game Reviews</h1>
+                    <p class="hero-subtitle">Get clear insights on gameplay, graphics, story, and overall experience</p>
+                    <a href="reviews.html" class="btn cyber-btn cyber-font mt-4">Browse All Reviews</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <!-- Top Rated Games -->
+        <section class="mb-5">
+            <div class="section-title">
+                <h2 class="cyber-font">Top Rated Games</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="cyber-card h-100">
+                        <img src="images/elden ring cover.avif" class="cyber-card-img" alt="Elden Ring">
+                        <div class="card-body p-4">
+                            <h5 class="card-title cyber-font">Elden Ring</h5>
+                            <p class="card-text text-secondary mb-3">An epic open-world RPG with challenging combat.</p>
+                            <p class="card-rating">★★★★★ 4.9</p>
+                            <a href="reviews.html#elden" class="btn cyber-btn w-100 mt-3">Read Review</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cyber-card h-100">
+                        <img src="images/gow cover.avif" class="cyber-card-img" alt="God of War">
+                        <div class="card-body p-4">
+                            <h5 class="card-title cyber-font">God of War</h5>
+                            <p class="card-text text-secondary mb-3">Stunning action-adventure with emotional storytelling.</p>
+                            <p class="card-rating">★★★★★ 4.8</p>
+                            <a href="reviews.html#gow" class="btn cyber-btn w-100 mt-3">Read Review</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cyber-card h-100">
+                        <img src="images/cyberpunk cover.jpg" class="cyber-card-img" alt="Cyberpunk 2077">
+                        <div class="card-body p-4">
+                            <h5 class="card-title cyber-font">Cyberpunk 2077</h5>
+                            <p class="card-text text-secondary mb-3">Futuristic RPG with immersive world.</p>
+                            <p class="card-rating">★★★★☆ 4.2</p>
+                            <a href="reviews.html#cyberpunk" class="btn cyber-btn w-100 mt-3">Read Review</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cyber-card h-100">
+                        <img src="images/hollow cover.jpg" class="cyber-card-img" alt="Hollow Knight">
+                        <div class="card-body p-4">
+                            <h5 class="card-title cyber-font">Hollow Knight</h5>
+                            <p class="card-text text-secondary mb-3">Beautiful hand-drawn metroidvania.</p>
+                            <p class="card-rating">★★★★★ 4.7</p>
+                            <a href="reviews.html#hollow" class="btn cyber-btn w-100 mt-3">Read Review</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Trailers -->
+        <section class="mb-5">
+            <div class="section-title">
+                <h2 class="cyber-font">Latest Trailers</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="cyber-video">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/E3Huy2cdih0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="cyber-video">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/gOE2BVRCUkM" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="mb-5">
+            <div class="section-title">
+                <h2 class="cyber-font">Quick Stats</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table cyber-table">
+                    <thead>
+                        <tr class="cyber-font">
+                            <th>Game</th>
+                            <th>Platform</th>
+                            <th>Rating</th>
+                            <th>Genre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="cyber-font">Elden Ring</td>
+                            <td>PC, PS5, XBOX</td>
+                            <td>9.5/10</td>
+                            <td>RPG</td>
+                        </tr>
+                        <tr>
+                            <td class="cyber-font">God of War</td>
+                            <td>PS5</td>
+                            <td>9.7/10</td>
+                            <td>Action</td>
+                        </tr>
+                        <tr>
+                            <td class="cyber-font">Cyberpunk 2077</td>
+                            <td>PC, PS5, XBOX</td>
+                            <td>8.3/10</td>
+                            <td>RPG</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Featured Games -->
+        <section class="mb-5">
+            <div class="section-title">
+                <h2 class="cyber-font">Featured Games</h2>
+            </div>
+            <ul class="list-group cyber-list">
+                <li class="list-group-item cyber-list-item d-flex justify-content-between align-items-center">
+                    <span class="cyber-font">Most Anticipated: Final Fantasy VII Rebirth</span>
+                    <button class="btn btn-sm cyber-btn">Preview</button>
+                </li>
+                <li class="list-group-item cyber-list-item d-flex justify-content-between align-items-center">
+                    <span class="cyber-font">Best Story: The Last of Us Part II</span>
+                    <button class="btn btn-sm cyber-btn">Preview</button>
+                </li>
+                <li class="list-group-item cyber-list-item d-flex justify-content-between align-items-center">
+                    <span class="cyber-font">Best Gameplay: Doom Eternal</span>
+                    <button class="btn btn-sm cyber-btn">Preview</button>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="cyber-footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <h4 class="cyber-font mb-3">GameHub</h4>
+                    <p class="text-secondary">Your ultimate destination for honest game reviews and insights.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-2">&copy; 2023 GameHub. All rights reserved.</p>
+                    <p class="mb-0">
+                        <a href="privacy.html" class="footer-link me-3">Privacy Policy</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize Particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#00f3ff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#b967ff",
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
+
+            // Loading screen
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 1500);
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('.cyber-nav');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // Search button
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                const searchInput = document.querySelector('.cyber-search');
+                if (searchInput.value.trim()) {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    setTimeout(() => {
+                        this.innerHTML = 'GO';
+                        alert('Searching for: ' + searchInput.value);
+                    }, 1000);
+                }
+            });
+
+            // Button hover effects
+            const buttons = document.querySelectorAll('.cyber-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 0 40px var(--neon-blue)';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '';
+                });
+            });
+
+            // Card hover effects
+            const cards = document.querySelectorAll('.cyber-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+
+            // List item animation
+            const listItems = document.querySelectorAll('.cyber-list-item');
+            listItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+                item.classList.add('animate__animated', 'animate__fadeInRight');
+            });
+
+            // Table row animation
+            const tableRows = document.querySelectorAll('.cyber-table tbody tr');
+            tableRows.forEach((row, index) => {
+                row.style.animationDelay = `${index * 0.1}s`;
+                row.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+        });
+    </script>
+</body>
+</html>

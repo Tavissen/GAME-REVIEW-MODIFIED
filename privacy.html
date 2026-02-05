@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Privacy Policy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem !important;
+        }
+        
+        .nav-link.active {
+            color: var(--neon-blue) !important;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+        
+        .privacy-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.1), rgba(0, 243, 255, 0.1));
+            border-bottom: 2px solid var(--neon-pink);
+        }
+        
+        .privacy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .privacy-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 42, 109, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .privacy-card:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.1);
+        }
+        
+        .privacy-title {
+            color: var(--neon-pink);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255, 42, 109, 0.3);
+        }
+        
+        .privacy-content {
+            color: var(--text-secondary);
+        }
+        
+        .privacy-content h3 {
+            color: var(--neon-blue);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .privacy-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .privacy-content li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .privacy-content li:before {
+            content: "▸";
+            color: var(--neon-blue);
+            position: absolute;
+            left: -1.5rem;
+        }
+        
+        .update-date {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 42, 109, 0.2);
+        }
+        
+        .contact-privacy {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .cyber-footer {
+            background: rgba(10, 10, 15, 0.95);
+            border-top: 1px solid rgba(0, 243, 255, 0.3);
+            margin-top: 3rem;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .privacy-container {
+                padding: 1rem;
+            }
+            
+            .privacy-hero {
+                padding: 120px 0 40px;
+            }
+            
+            .privacy-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--neon-pink);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active cyber-font" href="privacy.html">Privacy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="privacy-hero">
+        <div class="container text-center">
+            <h1 class="cyber-font display-5 mb-3">Privacy Policy</h1>
+            <p class="lead">How we protect and handle your information</p>
+        </div>
+    </header>
+
+    <main class="privacy-container">
+        <div class="privacy-card">
+            <h2 class="privacy-title cyber-font">Privacy & Data Protection</h2>
+            <div class="privacy-content">
+                <p>At GameHub, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+                
+                <h3>Information We Collect</h3>
+                <p>We may collect information about you in various ways:</p>
+                <ul>
+                    <li><strong>Personal Data:</strong> Name, email address, and other contact information when you submit reviews or contact us</li>
+                    <li><strong>Usage Data:</strong> Information about how you use our website, including IP address, browser type, and pages visited</li>
+                    <li><strong>Content Data:</strong> Game reviews, comments, and screenshots you submit to our platform</li>
+                    <li><strong>Technical Data:</strong> Device information, cookies, and analytics data</li>
+                </ul>
+                
+                <h3>How We Use Your Information</h3>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide and maintain our gaming community platform</li>
+                    <li>Process and display user-submitted reviews and content</li>
+                    <li>Respond to your inquiries and provide support</li>
+                    <li>Improve our website and user experience</li>
+                    <li>Communicate with you about updates and community news</li>
+                    <li>Monitor and analyze usage patterns and trends</li>
+                </ul>
+                
+                <h3>Data Security</h3>
+                <p>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure, and we cannot guarantee absolute security.</p>
+                
+                <h3>Cookies and Tracking</h3>
+                <p>We use cookies and similar tracking technologies to track activity on our website and hold certain information. Cookies are files with small amount of data which may include an anonymous unique identifier.</p>
+                <p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our website.</p>
+                
+                <h3>Third-Party Services</h3>
+                <p>We may employ third-party companies and individuals to facilitate our website, provide services on our behalf, or assist us in analyzing how our website is used. These third parties have access to your information only to perform these tasks and are obligated not to disclose or use it for any other purpose.</p>
+                
+                <h3>User Content</h3>
+                <p>When you submit reviews, comments, or screenshots to GameHub, you grant us permission to display and distribute that content on our platform. You retain ownership of your content, but you allow us to use it to operate our gaming community.</p>
+                
+                <h3>Children's Privacy</h3>
+                <p>Our website is not intended for individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.</p>
+                
+                <h3>Your Rights</h3>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access the personal information we hold about you</li>
+                    <li>Request correction of inaccurate personal information</li>
+                    <li>Request deletion of your personal information</li>
+                    <li>Object to processing of your personal information</li>
+                    <li>Request transfer of your personal information</li>
+                    <li>Withdraw consent at any time</li>
+                </ul>
+                
+                <h3>Changes to This Policy</h3>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us at privacy@gamehub.com.</p>
+            </div>
+        </div>
+        
+        <div class="update-date">
+            <p><i class="fas fa-calendar-alt me-2"></i>Last Updated: December 1, 2023</p>
+        </div>
+        
+        <div class="contact-privacy">
+            <h4 class="cyber-font mb-3">Privacy Questions?</h4>
+            <p class="mb-3">If you have concerns about your privacy or data, please reach out to our privacy team.</p>
+            <a href="contact.html" class="btn" style="background: transparent; border: 1px solid var(--neon-pink); color: var(--neon-pink); padding: 0.5rem 1.5rem; text-decoration: none;">Contact Privacy Team</a>
+        </div>
+    </main>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="cyber-footer">
+        <div class="container">
+            <p class="mb-2">&copy; 2023 GameHub. All rights reserved.</p>
+            <p class="text-secondary small">Your privacy is important to us</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.style.display = 'flex';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Privacy policy section highlighting
+            const sections = document.querySelectorAll('.privacy-content h3');
+            sections.forEach(section => {
+                section.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    while (content && !content.tagName.match(/^(P|UL)$/)) {
+                        content = content.nextElementSibling;
+                    }
+                    
+                    if (content) {
+                        content.style.backgroundColor = 'rgba(0, 243, 255, 0.05)';
+                        content.style.padding = '1rem';
+                        content.style.borderRadius = '5px';
+                        content.style.transition = 'all 0.3s ease';
+                        
+                        setTimeout(() => {
+                            content.style.backgroundColor = '';
+                            content.style.padding = '';
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Privacy card animation
+            const privacyCards = document.querySelectorAll('.privacy-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            privacyCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Update current year in footer
+            const yearSpan = document.querySelector('#currentYear');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
