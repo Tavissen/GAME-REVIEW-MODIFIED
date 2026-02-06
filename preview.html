@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Game Preview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+            position: relative;
+            padding-right: 10px;
+        }
+        
+        .nav-brand::after {
+            content: '▮';
+            color: var(--neon-blue);
+            position: absolute;
+            right: 0;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem !important;
+            margin: 0 0.25rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--neon-blue) !important;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .preview-container {
+            padding: 120px 0 60px;
+        }
+        
+        .game-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+        
+        .game-info {
+            background: rgba(19, 19, 32, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+        
+        .info-label {
+            color: var(--neon-blue);
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .info-value {
+            color: var(--text-primary);
+        }
+        
+        .trailer-container {
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .screenshot {
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .screenshot:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+            border-color: var(--neon-blue);
+        }
+        
+        .screenshot img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .requirements {
+            background: rgba(19, 19, 32, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .requirements h3 {
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        .cyber-footer {
+            background: rgba(10, 10, 15, 0.95);
+            border-top: 2px solid rgba(0, 243, 255, 0.3);
+            margin-top: 60px;
+            padding: 2rem 0;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--neon-blue);
+        }
+        
+        .shop-btn {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            border: 2px solid transparent;
+            color: white;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            border-radius: 0;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .shop-btn:hover {
+            background: transparent;
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+        }
+        
+        .login-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 2.5rem;
+            }
+            
+            .preview-container {
+                padding: 100px 0 40px;
+            }
+            
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="cyberNav">
+                <ul class="navbar-nav me-auto ms-4">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="accessories.html" class="btn shop-btn cyber-font me-3" title="Accessories">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="login.html" class="btn login-btn cyber-font">
+                        <i class="fas fa-user me-2"></i>Login/Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="preview-container">
+        <div class="container">
+            <h1 class="game-title cyber-font" id="gameTitle">Game Preview</h1>
+            
+            <div class="game-info">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="info-item">
+                            <span class="info-label">Developer:</span>
+                            <span class="info-value" id="developer">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Publisher:</span>
+                            <span class="info-value" id="publisher">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Release Date:</span>
+                            <span class="info-value" id="releaseDate">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Genre:</span>
+                            <span class="info-value" id="genre">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Platforms:</span>
+                            <span class="info-value" id="platforms">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-item">
+                            <span class="info-label">Rating:</span>
+                            <span class="info-value" id="rating">★★★★★</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Players:</span>
+                            <span class="info-value" id="players">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Mode:</span>
+                            <span class="info-value" id="mode">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trailer-container">
+                <div class="ratio ratio-16x9">
+                    <iframe id="trailerVideo" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="game-info">
+                <h3 class="cyber-font mb-3" style="color: var(--neon-blue);">About This Game</h3>
+                <p id="gameDescription" class="text-secondary">
+                    Loading game description...
+                </p>
+            </div>
+            
+            <h3 class="cyber-font mb-3" style="color: var(--neon-blue);">Screenshots</h3>
+            <div class="screenshot-grid">
+                <div class="screenshot">
+                    <img id="screenshot1" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Game Screenshot 1">
+                </div>
+                <div class="screenshot">
+                    <img id="screenshot2" src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Game Screenshot 2">
+                </div>
+                <div class="screenshot">
+                    <img id="screenshot3" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Game Screenshot 3">
+                </div>
+            </div>
+            
+            <div class="requirements">
+                <h3 class="cyber-font">System Requirements</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 style="color: var(--neon-blue);">Minimum</h5>
+                        <ul class="text-secondary" id="minRequirements">
+                            <li>OS: Windows 10 64-bit</li>
+                            <li>Processor: Intel Core i5-2500K or AMD FX-6300</li>
+                            <li>Memory: 8 GB RAM</li>
+                            <li>Graphics: NVIDIA GeForce GTX 770 or AMD Radeon R9 280</li>
+                            <li>Storage: 50 GB available space</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 style="color: var(--neon-blue);">Recommended</h5>
+                        <ul class="text-secondary" id="recRequirements">
+                            <li>OS: Windows 10 64-bit</li>
+                            <li>Processor: Intel Core i7-4770K or AMD Ryzen 5 1500X</li>
+                            <li>Memory: 16 GB RAM</li>
+                            <li>Graphics: NVIDIA GeForce GTX 1060 or AMD Radeon RX 580</li>
+                            <li>Storage: 50 GB available space</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="index.html" class="btn cyber-btn cyber-font">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="cyber-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <h4 class="cyber-font mb-3">GameHub</h4>
+                    <p class="text-secondary">Your ultimate destination for honest game reviews and insights.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-2">&copy; 2023 GameHub. All rights reserved.</p>
+                    <p class="mb-0">
+                        <a href="privacy.html" class="footer-link me-3">Privacy Policy</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const games = {
+            'final-fantasy-vii': {
+                title: 'Final Fantasy VII Rebirth',
+                developer: 'Square Enix',
+                publisher: 'Square Enix',
+                releaseDate: 'February 29, 2024',
+                genre: 'Action RPG',
+                platforms: 'PS5',
+                rating: '★★★★★',
+                players: '1 Player',
+                mode: 'Single-player',
+                description: 'Final Fantasy VII Rebirth is the second installment in the Final Fantasy VII remake trilogy. The game continues the story of Cloud Strife and his allies as they leave the city of Midgar and explore the wider world, pursuing the enigmatic Sephiroth.',
+                trailer: 'https://www.youtube.com/embed/wHus5rqyl4E',
+                minRequirements: [
+                    'OS: Windows 10 64-bit',
+                    'Processor: Intel Core i5-3570 or AMD Ryzen 3 1200',
+                    'Memory: 8 GB RAM',
+                    'Graphics: NVIDIA GeForce GTX 780 or AMD Radeon RX 480',
+                    'Storage: 100 GB available space'
+                ],
+                recRequirements: [
+                    'OS: Windows 10 64-bit',
+                    'Processor: Intel Core i7-3770 or AMD Ryzen 5 1600',
+                    'Memory: 12 GB RAM',
+                    'Graphics: NVIDIA GeForce GTX 1080 or AMD Radeon RX 5700',
+                    'Storage: 100 GB available space'
+                ]
+            },
+            'last-of-us-2': {
+                title: 'The Last of Us Part II',
+                developer: 'Naughty Dog',
+                publisher: 'Sony Interactive Entertainment',
+                releaseDate: 'June 19, 2020',
+                genre: 'Action-adventure',
+                platforms: 'PS4, PS5',
+                rating: '★★★★★',
+                players: '1 Player',
+                mode: 'Single-player',
+                description: 'The Last of Us Part II is an action-adventure game set five years after the events of the first game. Players control Ellie as she seeks revenge in a post-apocalyptic United States.',
+                trailer: 'https://www.youtube.com/embed/btmN-bWwv0A',
+                minRequirements: [
+                    'OS: Windows 10 64-bit',
+                    'Processor: Intel Core i5-2500K or AMD FX-6300',
+                    'Memory: 8 GB RAM',
+                    'Graphics: NVIDIA GeForce GTX 770 or AMD Radeon R9 280',
+                    'Storage: 60 GB available space'
+                ],
+                recRequirements: [
+                    'OS: Windows 10 64-bit',
+                    'Processor: Intel Core i7-4770K or AMD Ryzen 5 1500X',
+                    'Memory: 16 GB RAM',
+                    'Graphics: NVIDIA GeForce GTX 1060 or AMD Radeon RX 580',
+                    'Storage: 60 GB available space'
+                ]
+            },
+            'doom-eternal': {
+                title: 'Doom Eternal',
+                developer: 'id Software',
+                publisher: 'Bethesda Softworks',
+                releaseDate: 'March 20, 2020',
+                genre: 'First-person shooter',
+                platforms: 'PC, PS4, XBOX, Nintendo Switch',
+                rating: '★★★★☆',
+                players: '1-2 Players',
+                mode: 'Single-player, Multiplayer',
+                description: 'Doom Eternal is a first-person shooter game and the direct sequel to Doom (2016). Players once again take on the role of the Doom Slayer, battling demonic forces from Hell.',
+                trailer: 'https://www.youtube.com/embed/_UukNkSfE7o',
+                minRequirements: [
+                    'OS: Windows 10 64-bit',
+                    'Processor: Intel Core i5-3570 or AMD Ryzen 3 1200',
+                    'Memory: 8 GB RAM',
+                    'Graphics: NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 470',
+                    'Storage: 50 GB available space'
+                ],
+                recRequirements: [
+                    'OS: Windows 10 64-bit',
+                    'Processor: Intel Core i7-4770K or AMD Ryzen 5 1600',
+                    'Memory: 8 GB RAM',
+                    'Graphics: NVIDIA GeForce GTX 1660 or AMD Radeon RX Vega 56',
+                    'Storage: 50 GB available space'
+                ]
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('game') || 'final-fantasy-vii';
+        const game = games[gameId] || games['final-fantasy-vii'];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('gameTitle').textContent = game.title;
+            document.getElementById('developer').textContent = game.developer;
+            document.getElementById('publisher').textContent = game.publisher;
+            document.getElementById('releaseDate').textContent = game.releaseDate;
+            document.getElementById('genre').textContent = game.genre;
+            document.getElementById('platforms').textContent = game.platforms;
+            document.getElementById('rating').textContent = game.rating;
+            document.getElementById('players').textContent = game.players;
+            document.getElementById('mode').textContent = game.mode;
+            document.getElementById('gameDescription').textContent = game.description;
+            
+            const trailerIframe = document.getElementById('trailerVideo');
+            const videoId = game.trailer.split('embed/')[1];
+            trailerIframe.src = `https://www.youtube.com/embed/${videoId}`;
+            
+            const minReqList = document.getElementById('minRequirements');
+            const recReqList = document.getElementById('recRequirements');
+            
+            minReqList.innerHTML = '';
+            recReqList.innerHTML = '';
+            
+            game.minRequirements.forEach(req => {
+                const li = document.createElement('li');
+                li.textContent = req;
+                minReqList.appendChild(li);
+            });
+            
+            game.recRequirements.forEach(req => {
+                const li = document.createElement('li');
+                li.textContent = req;
+                recReqList.appendChild(li);
+            });
+            
+            document.title = `GameHub | ${game.title} Preview`;
+        });
+    </script>
+</body>
+</html>

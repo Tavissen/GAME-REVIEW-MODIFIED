@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Warranty Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .warranty-header {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border-bottom: 2px solid var(--neon-purple);
+        }
+        
+        .info-card {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-5px);
+        }
+        
+        .warranty-badge {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .terms-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+        
+        .terms-list li:before {
+            content: '✓';
+            color: var(--neon-blue);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .coverage-box {
+            border: 2px solid var(--neon-pink);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background: rgba(255, 42, 109, 0.05);
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+            margin-left: 10px;
+        }
+        
+        .login-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+        
+        .contact-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+        
+        .contact-btn.warranty-btn {
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+        }
+        
+        .contact-btn.warranty-btn:hover {
+            background: rgba(185, 103, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="accessories.html">Accessories</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="accessories.html" class="btn btn-outline-light me-2">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Shop
+                    </a>
+                    <a href="login.html" class="btn login-btn cyber-font">
+                        <i class="fas fa-user me-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="warranty-header">
+        <div class="container text-center">
+            <h1 class="cyber-font display-4 mb-3">Warranty Information</h1>
+            <p class="lead mb-4">Comprehensive protection for your gaming gear</p>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="info-card">
+                    <div class="warranty-badge">Standard Warranty</div>
+                    <h3 class="cyber-font mb-4">1-Year Limited Warranty</h3>
+                    <p>All GameHub accessories come with a standard 1-year limited warranty from the date of purchase. This warranty covers:</p>
+                    
+                    <div class="coverage-box">
+                        <h5 class="cyber-font">🛡️ Covered</h5>
+                        <ul class="terms-list">
+                            <li>Manufacturing defects</li>
+                            <li>Hardware failures under normal use</li>
+                            <li>Faulty materials or workmanship</li>
+                            <li>Non-working components</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="coverage-box" style="border-color: #ffc107; background: rgba(255, 193, 7, 0.05);">
+                        <h5 class="cyber-font">⚠️ Not Covered</h5>
+                        <ul class="terms-list">
+                            <li>Accidental damage (drops, spills, etc.)</li>
+                            <li>Normal wear and tear</li>
+                            <li>Cosmetic damage</li>
+                            <li>Unauthorized repairs or modifications</li>
+                            <li>Damage from improper use</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="warranty-badge" style="background: linear-gradient(45deg, var(--neon-pink), #ff6b9d);">Extended Warranty</div>
+                    <h3 class="cyber-font mb-4">GameHub Protection Plan</h3>
+                    <p>Extend your coverage with our premium protection plan:</p>
+                    
+                    <div class="row g-4 mt-3">
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded text-center" style="border-color: var(--neon-blue) !important; height: 100%;">
+                                <h5 class="cyber-font">2-Year Extended</h5>
+                                <h3 class="my-3">$19.99</h3>
+                                <p class="text-secondary">per accessory</p>
+                                <ul class="terms-list text-start">
+                                    <li>+1 year beyond standard</li>
+                                    <li>Accidental damage coverage</li>
+                                    <li>Battery replacement</li>
+                                    <li>Express replacement</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded text-center" style="border-color: var(--neon-pink) !important; height: 100%;">
+                                <h5 class="cyber-font">3-Year Ultimate</h5>
+                                <h3 class="my-3">$34.99</h3>
+                                <p class="text-secondary">per accessory</p>
+                                <ul class="terms-list text-start">
+                                    <li>+2 years beyond standard</li>
+                                    <li>Full accidental coverage</li>
+                                    <li>Theft protection</li>
+                                    <li>Priority support</li>
+                                    <li>Loaner equipment</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="warranty-badge" style="background: linear-gradient(45deg, #28a745, #20c997);">Claim Process</div>
+                    <h3 class="cyber-font mb-4">How to File a Warranty Claim</h3>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4 text-center">
+                            <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <h5>1. Register Product</h5>
+                            <p class="text-secondary small">Register within 30 days of purchase</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="rounded-circle bg-warning d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h5>2. Troubleshoot</h5>
+                            <p class="text-secondary small">Try basic troubleshooting steps</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="rounded-circle bg-success d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h5>3. Submit Claim</h5>
+                            <p class="text-secondary small">Complete online claim form</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <p><strong>Required Information:</strong></p>
+                        <ul class="text-secondary">
+                            <li>Proof of purchase (receipt/invoice)</li>
+                            <li>Product serial number</li>
+                            <li>Description of the issue</li>
+                            <li>Photos/video of the problem</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="warranty-badge" style="background: linear-gradient(45deg, #17a2b8, #138496);">International Coverage</div>
+                    <h3 class="cyber-font mb-4">Global Warranty Support</h3>
+                    <p>GameHub provides international warranty coverage in over 40 countries. Warranty service is available through authorized service centers worldwide.</p>
+                    
+                    <div class="alert alert-info" style="background: rgba(23, 162, 184, 0.1); border-color: #17a2b8;">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Note:</strong> International warranty claims may require additional processing time. Shipping costs for warranty repairs may vary by region.
+                    </div>
+                    
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="contact.html?reason=warranty" class="contact-btn warranty-btn">
+                            <i class="fas fa-envelope me-2"></i>Warranty Support
+                        </a>
+                        <a href="contact.html?reason=warranty" class="contact-btn">
+                            <i class="fas fa-phone me-2"></i>Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pt-5 pb-4 mt-5" style="background: rgba(10, 10, 15, 0.95); border-top: 2px solid rgba(0, 243, 255, 0.3);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub Warranty</h4>
+                    <p class="text-secondary">Protecting your gaming investment.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="shipping.html" class="text-secondary text-decoration-none me-3">Shipping Info</a>
+                        <a href="warranty.html" class="text-secondary text-decoration-none">Warranty</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

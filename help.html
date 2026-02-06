@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Help & Support</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .help-header {
+            padding: 160px 0 60px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border-bottom: 2px solid var(--neon-pink);
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .support-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .support-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(185, 103, 255, 0.3);
+        }
+        
+        .help-section {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .faq-item {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--neon-blue);
+            background: rgba(0, 243, 255, 0.1);
+        }
+        
+        .faq-item.active {
+            border-color: var(--neon-pink);
+            background: rgba(255, 42, 109, 0.1);
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+        
+        .help-card {
+            background: rgba(19, 19, 32, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .help-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+        }
+        
+        .help-icon {
+            font-size: 3rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-form {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        
+        .form-input {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.75rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            outline: none;
+        }
+        
+        .guide-step {
+            background: rgba(185, 103, 255, 0.1);
+            border: 1px solid rgba(185, 103, 255, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .urgent-card {
+            background: rgba(255, 42, 109, 0.1);
+            border: 2px solid var(--neon-pink);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+            margin-left: 10px;
+        }
+        
+        .login-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="accessories.html">Accessories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="help.html">Help</a>
+                    </li>
+                </ul>
+                <div>
+                    <a href="login.html" class="btn login-btn cyber-font">
+                        <i class="fas fa-user me-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="help-header">
+        <div class="container text-center">
+            <h1 class="cyber-font display-4 mb-3">Help & Support</h1>
+            <p class="lead mb-4">Find answers, get support, or contact our team</p>
+            <a href="#faq" class="btn cyber-btn">
+                <i class="fas fa-question-circle me-2"></i>Browse FAQ
+            </a>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <section class="help-section animate-in">
+            <h2 class="cyber-font mb-4 text-center">How Can We Help You?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <h4>FAQs</h4>
+                        <p>Browse frequently asked questions for quick answers</p>
+                        <a href="#faq" class="btn cyber-btn w-100 mt-3">View FAQs</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4>Contact Support</h4>
+                        <p>Get direct help from our support team</p>
+                        <a href="#contact" class="btn cyber-btn w-100 mt-3">Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Guides</h4>
+                        <p>Step-by-step tutorials and guides</p>
+                        <a href="#guides" class="btn cyber-btn w-100 mt-3">View Guides</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-section animate-in" id="faq" style="animation-delay: 0.1s">
+            <h2 class="cyber-font mb-4">Frequently Asked Questions</h2>
+            
+            <div class="mb-4">
+                <h5 class="mb-3">Account & Profile</h5>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        How do I create an account?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Click the "Login/Register" button in the top navigation, then select "Create Account". Fill in your details, choose your favorite genres, and you're ready to join the GameHub community!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        I forgot my password. What should I do?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>On the login page, click "Forgot password?" and enter your email address. We'll send you a link to reset your password. Check your spam folder if you don't see the email.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        How do I update my profile information?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>After logging in, click on your profile icon in the top right corner, then select "Edit Profile". You can update your username, email, favorite genres, and profile picture from there.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <h5 class="mb-3">Reviews & Content</h5>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        How do I write a game review?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Navigate to the Reviews page and scroll to the "Write Your Own Review" section. Fill in the game title, select a platform, give your rating, and write your review. Click "Submit Review" when done.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        Can I edit or delete my review?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Go to your profile page, click on "My Reviews", and you'll see options to edit or delete each review. You can only edit or delete your own reviews.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        How are game ratings calculated?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Game ratings are an average of all user ratings, weighted by reviewer credibility. Our expert reviews also influence the overall score. We use a transparent algorithm to ensure fair ratings.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <h5 class="mb-3">Shopping & Purchases</h5>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        How do I purchase a game or accessory?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Browse the Shop or Accessories page, select your item, choose platform/store, and click "Add to Cart". Proceed to checkout to complete your purchase. Digital games are delivered instantly via email.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        What payment methods do you accept?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and digital wallets. Payment processing is secured with 256-bit SSL encryption.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        What is your refund policy?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Digital games: 14-day refund if not downloaded/activated. Accessories: 30-day return policy for defective items. Physical goods: Return within 30 days in original packaging.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <h5 class="mb-3">Technical Issues</h5>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        The website is loading slowly. What can I do?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Try clearing your browser cache, disable browser extensions, or try a different browser. Ensure you have a stable internet connection. If issues persist, contact our support team.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        Videos aren't playing. How do I fix this?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ensure your browser supports HTML5 video. Update your browser to the latest version. Disable any ad blockers or privacy extensions that might be blocking video content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-section animate-in" id="guides" style="animation-delay: 0.2s">
+            <h2 class="cyber-font mb-4">Quick Guides</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="guide-step">
+                        <div class="step-number">1</div>
+                        <h5>Getting Started with GameHub</h5>
+                        <p>Create your account, set up your gaming preferences, and start exploring reviews and community content.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="guide-step">
+                        <div class="step-number">2</div>
+                        <h5>Writing Great Reviews</h5>
+                        <p>Learn how to write helpful reviews that contribute to our gaming community. Tips on structure and content.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="guide-step">
+                        <div class="step-number">3</div>
+                        <h5>Safe Shopping Guide</h5>
+                        <p>How to make secure purchases, protect your account, and recognize legitimate deals vs. scams.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="guide-step">
+                        <div class="step-number">4</div>
+                        <h5>Community Guidelines</h5>
+                        <p>Understand our community rules, moderation policies, and how to report inappropriate content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="animate-in" style="animation-delay: 0.3s">
+            <div class="urgent-card">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h4 class="cyber-font mb-2"><i class="fas fa-exclamation-triangle me-2"></i>Urgent Support</h4>
+                        <p class="mb-0">For account security issues, unauthorized purchases, or urgent matters, contact us immediately.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <a href="#contact" class="btn support-btn">
+                            <i class="fas fa-headset me-2"></i>Urgent Help
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-section animate-in" id="contact" style="animation-delay: 0.4s">
+            <h2 class="cyber-font mb-4">Contact Support</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <form class="contact-form" id="supportForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label mb-2">Your Name</label>
+                                <input type="text" class="form-input" placeholder="Enter your name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label mb-2">Email Address</label>
+                                <input type="email" class="form-input" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label mb-2">Subject</label>
+                            <select class="form-input" required>
+                                <option value="">Select a category</option>
+                                <option>Account Issues</option>
+                                <option>Technical Problems</option>
+                                <option>Purchase & Refunds</option>
+                                <option>Content & Reviews</option>
+                                <option>Suggestions & Feedback</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label mb-2">Description</label>
+                            <textarea class="form-input" rows="5" placeholder="Describe your issue in detail..." required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label mb-2">Priority</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="priority" id="low" checked>
+                                    <label class="form-check-label" for="low">Low (General inquiry)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="priority" id="medium">
+                                    <label class="form-check-label" for="medium">Medium (Need help soon)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="priority" id="high">
+                                    <label class="form-check-label" for="high">High (Urgent issue)</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn support-btn w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Send Support Request
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="contact-form">
+                        <h5 class="mb-3">Support Information</h5>
+                        <div class="mb-3">
+                            <strong>Email Support:</strong>
+                            <div>support@gamehub.com</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Phone Support:</strong>
+                            <div>+1 (555) 123-4567</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Response Time:</strong>
+                            <div>Within 24 hours (Urgent: 2 hours)</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Live Chat:</strong>
+                            <div>Available Monday-Friday, 9AM-6PM EST</div>
+                        </div>
+                        <div class="mt-4">
+                            <h6>Before Contacting Us</h6>
+                            <ul class="ps-3 mb-0">
+                                <li class="mb-2">Check our FAQ section above</li>
+                                <li class="mb-2">Clear browser cache</li>
+                                <li>Have your order number ready</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pt-5 pb-4 mt-5" style="background: rgba(10, 10, 15, 0.95); border-top: 2px solid rgba(0, 243, 255, 0.3);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub</h4>
+                    <p class="text-secondary">Your ultimate destination for honest game reviews and insights.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="about.html" class="text-secondary text-decoration-none me-3">About</a>
+                        <a href="help.html" class="text-secondary text-decoration-none me-3">Help</a>
+                        <a href="contact.html" class="text-secondary text-decoration-none me-3">Contact</a>
+                        <a href="privacy.html" class="text-secondary text-decoration-none">Privacy</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 40, density: { enable: true, value_area: 800 } },
+                color: { value: "#b967ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#ff2a6d",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.toggleFAQ = function(element) {
+                const isActive = element.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                if (!isActive) {
+                    element.classList.add('active');
+                }
+            };
+
+            document.getElementById('supportForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Message Sent!';
+                    submitBtn.classList.add('bg-success');
+                    
+                    this.reset();
+                    
+                    alert('Thank you! Your support request has been submitted. We\'ll respond within 24 hours.');
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Support Request';
+                        submitBtn.classList.remove('bg-success');
+                    }, 3000);
+                }, 1500);
+            });
+
+            const animatedElements = document.querySelectorAll('.animate-in');
+            animatedElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * (index + 1));
+            });
+        });
+    </script>
+</body>
+</html>

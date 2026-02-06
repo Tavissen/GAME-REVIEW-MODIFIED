@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Community Guidelines</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%);
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .guidelines-container {
+            padding: 120px 0 60px;
+        }
+        
+        .guideline-section {
+            background: var(--card-bg);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .guideline-icon {
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem !important;
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .cyber-footer {
+            background: rgba(10, 10, 15, 0.95);
+            border-top: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 3rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="comments.html">Community</a>
+                    </li>
+                </ul>
+                <a href="index.html" class="btn cyber-btn cyber-font">
+                    <i class="fas fa-home me-2"></i>Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="guidelines-container">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="cyber-font display-4 mb-3">Community Guidelines</h1>
+                <p class="lead">Rules and expectations for our gaming community</p>
+            </div>
+
+            <div class="guideline-section">
+                <div class="guideline-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="cyber-font mb-3">1. Be Respectful</h3>
+                <ul class="text-secondary">
+                    <li>Treat all members with respect and courtesy</li>
+                    <li>No harassment, bullying, or hate speech</li>
+                    <li>Respect different opinions and experiences</li>
+                    <li>Constructive criticism is welcome, personal attacks are not</li>
+                </ul>
+            </div>
+
+            <div class="guideline-section">
+                <div class="guideline-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="cyber-font mb-3">2. Quality Discussions</h3>
+                <ul class="text-secondary">
+                    <li>Keep discussions game-related and on-topic</li>
+                    <li>No spamming or excessive self-promotion</li>
+                    <li>Use spoiler tags for major story content</li>
+                    <li>Share your experiences and insights</li>
+                </ul>
+            </div>
+
+            <div class="guideline-section">
+                <div class="guideline-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="cyber-font mb-3">3. Content Rules</h3>
+                <ul class="text-secondary">
+                    <li>No NSFW or inappropriate content</li>
+                    <li>No piracy, cheating, or hacking discussions</li>
+                    <li>Respect copyright and intellectual property</li>
+                    <li>No personal information sharing</li>
+                </ul>
+            </div>
+
+            <div class="guideline-section">
+                <div class="guideline-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3 class="cyber-font mb-3">4. Moderation</h3>
+                <ul class="text-secondary">
+                    <li>Moderators have final say in disputes</li>
+                    <li>Report violations using the report button</li>
+                    <li>Appeals can be made via contact form</li>
+                    <li>Rules apply to all members equally</li>
+                </ul>
+            </div>
+
+            <div class="guideline-section">
+                <div class="guideline-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="cyber-font mb-3">5. Gaming Etiquette</h3>
+                <ul class="text-secondary">
+                    <li>No cheating or exploiting glitches in multiplayer</li>
+                    <li>Be a good sport, win or lose</li>
+                    <li>Help new players learn and improve</li>
+                    <li>Share tips and strategies constructively</li>
+                </ul>
+            </div>
+
+            <div class="text-center mt-5">
+                <div class="alert alert-info" style="background: rgba(0, 243, 255, 0.1); border-color: var(--neon-blue); color: var(--text-primary);">
+                    <h5 class="cyber-font"><i class="fas fa-info-circle me-2"></i>Important Notice</h5>
+                    <p class="mb-0">Violation of these guidelines may result in content removal, temporary suspension, or permanent banning from the GameHub community.</p>
+                </div>
+                <a href="comments.html" class="btn cyber-btn mt-3">
+                    <i class="fas fa-comments me-2"></i>Join the Community
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="cyber-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub Community</h4>
+                    <p class="text-secondary">Building a positive gaming community together.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="privacy.html" class="text-secondary text-decoration-none me-3">Privacy Policy</a>
+                        <a href="community.html" class="text-secondary text-decoration-none me-3">Community Guidelines</a>
+                        <a href="contact.html" class="text-secondary text-decoration-none">Contact Us</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

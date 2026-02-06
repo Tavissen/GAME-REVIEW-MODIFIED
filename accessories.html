@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Gaming Accessories</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .accessories-header {
+            padding: 160px 0 60px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border-bottom: 2px solid var(--neon-pink);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .accessories-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .buy-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(185, 103, 255, 0.3);
+        }
+        
+        .accessory-card {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .accessory-card:hover {
+            border-color: var(--neon-pink);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 42, 109, 0.2);
+        }
+        
+        .accessory-img {
+            height: 200px;
+            width: 100%;
+            object-fit: contain;
+            background: rgba(10, 10, 15, 0.5);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price-tag {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+        }
+        
+        .discount-badge {
+            background: var(--neon-pink);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .rating {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-badge {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .filter-section {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .filter-select {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.75rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-select:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            outline: none;
+        }
+        
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+        
+        .compatibility-badge {
+            background: rgba(185, 103, 255, 0.1);
+            border: 1px solid var(--neon-purple);
+            color: var(--neon-purple);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-right: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quantity-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: rgba(0, 243, 255, 0.2);
+            border-color: var(--neon-blue);
+        }
+        
+        .quantity-input {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.25rem;
+            text-align: center;
+            width: 60px;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--neon-pink);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .featured-accessory {
+            border: 3px solid var(--neon-pink);
+            background: linear-gradient(135deg, rgba(19, 19, 32, 0.9), rgba(10, 10, 15, 0.9));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-accessory::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 42, 109, 0.1), transparent);
+            z-index: -1;
+        }
+        
+        .comparison-table {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.2), rgba(185, 103, 255, 0.2));
+            color: var(--neon-blue);
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+            margin-left: 10px;
+        }
+        
+        .login-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active cyber-font" href="accessories.html">Accessories</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <!-- Cart Icon -->
+                    <div class="position-relative me-3">
+                        <button class="btn cyber-btn" onclick="viewCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+                    <!-- Login Button -->
+                    <a href="login.html" class="btn login-btn cyber-font">
+                        <i class="fas fa-user me-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="accessories-header">
+        <div class="container text-center">
+            <h1 class="cyber-font display-4 mb-3">Gaming Accessories</h1>
+            <p class="lead mb-4">Premium gear to level up your gaming experience</p>
+            <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+                <span class="badge bg-primary">Headsets</span>
+                <span class="badge bg-success">Keyboards</span>
+                <span class="badge bg-warning">Mice</span>
+                <span class="badge bg-danger">Controllers</span>
+                <span class="badge bg-info">Monitors</span>
+                <span class="badge bg-secondary">Chairs</span>
+            </div>
+            <a href="#products" class="btn cyber-btn">
+                <i class="fas fa-arrow-down me-2"></i>Browse Collection
+            </a>
+        </div>
+    </header>
+
+    <main class="container py-5" id="products">
+        <div class="row">
+            <!-- Filters Sidebar -->
+            <div class="col-lg-3">
+                <div class="filter-section animate-in">
+                    <h4 class="cyber-font mb-3">Filters</h4>
+                    
+                    <!-- Price Range -->
+                    <div class="mb-4">
+                        <label class="form-label mb-2">Price Range</label>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span id="minPrice">$0</span>
+                            <span id="maxPrice">$500</span>
+                        </div>
+                        <input type="range" class="form-range" min="0" max="500" value="500" id="priceRange">
+                    </div>
+                    
+                    <!-- Categories -->
+                    <div class="mb-4">
+                        <label class="form-label mb-2">Category</label>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryAll" checked>
+                                <label class="form-check-label" for="categoryAll">All Categories</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryHeadsets">
+                                <label class="form-check-label" for="categoryHeadsets">Headsets</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryKeyboards">
+                                <label class="form-check-label" for="categoryKeyboards">Keyboards</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryMice">
+                                <label class="form-check-label" for="categoryMice">Gaming Mice</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryControllers">
+                                <label class="form-check-label" for="categoryControllers">Controllers</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryMonitors">
+                                <label class="form-check-label" for="categoryMonitors">Monitors</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryChairs">
+                                <label class="form-check-label" for="categoryChairs">Gaming Chairs</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Brands -->
+                    <div class="mb-4">
+                        <label class="form-label mb-2">Brand</label>
+                        <select class="filter-select" id="brandSelect">
+                            <option value="">All Brands</option>
+                            <option>Razer</option>
+                            <option>Logitech</option>
+                            <option>SteelSeries</option>
+                            <option>Corsair</option>
+                            <option>HyperX</option>
+                            <option>ASUS ROG</option>
+                            <option>Xbox</option>
+                            <option>PlayStation</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label mb-2">Compatibility</label>
+                        <select class="filter-select" id="compatibilitySelect">
+                            <option value="">All Platforms</option>
+                            <option>PC</option>
+                            <option>PlayStation 5</option>
+                            <option>Xbox Series X</option>
+                            <option>Nintendo Switch</option>
+                            <option>Multi-platform</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn cyber-btn w-100" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-outline-secondary w-100 mt-2" onclick="resetFilters()">Reset</button>
+                </div>
+                
+                <div class="filter-section mt-4 animate-in" style="animation-delay: 0.1s">
+                    <h5 class="cyber-font mb-3">🔥 Hot Deal</h5>
+                    <div class="accessory-card featured-accessory">
+                        <span class="discount-badge">-25%</span>
+                        <img src="https://images.unsplash.com/photo-1600086827875-7e8a1e643739?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                             alt="Razer Headset" class="accessory-img">
+                        <h6 class="cyber-font">Razer Kraken V3</h6>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-decoration-line-through text-secondary">$149.99</span>
+                                <span class="price-tag ms-2">$112.49</span>
+                            </div>
+                        </div>
+                        <button class="btn buy-btn w-100 mt-3" onclick="addToCart('featured')">
+                            <i class="fas fa-bolt me-2"></i>Buy Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="cyber-font">All Accessories</h3>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Sort by:</span>
+                        <select class="filter-select" style="width: auto;">
+                            <option>Most Popular</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Highest Rated</option>
+                            <option>Newest</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row g-4" id="accessoriesGrid">
+                </div>
+                
+                <div class="comparison-table animate-in mt-5" style="animation-delay: 0.2s">
+                    <h4 class="cyber-font p-3 mb-0">Headset Comparison</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Price</th>
+                                    <th>Type</th>
+                                    <th>Noise Cancelling</th>
+                                    <th>Battery Life</th>
+                                    <th>Compatibility</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SteelSeries Arctis 7</td>
+                                    <td>$149.99</td>
+                                    <td>Wireless</td>
+                                    <td>Yes</td>
+                                    <td>24 hours</td>
+                                    <td>PC, PS5, Switch</td>
+                                </tr>
+                                <tr>
+                                    <td>HyperX Cloud II</td>
+                                    <td>$99.99</td>
+                                    <td>Wired</td>
+                                    <td>Passive</td>
+                                    <td>N/A</td>
+                                    <td>PC, PS4, Xbox</td>
+                                </tr>
+                                <tr>
+                                    <td>Razer Kraken V3</td>
+                                    <td>$149.99</td>
+                                    <td>Wired</td>
+                                    <td>Yes</td>
+                                    <td>N/A</td>
+                                    <td>PC, PS5, Xbox</td>
+                                </tr>
+                                <tr>
+                                    <td>Logitech G Pro X</td>
+                                    <td>$129.99</td>
+                                    <td>Wireless</td>
+                                    <td>Yes</td>
+                                    <td>20 hours</td>
+                                    <td>PC, PS4, PS5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pt-5 pb-4 mt-5" style="background: rgba(10, 10, 15, 0.95); border-top: 2px solid rgba(0, 243, 255, 0.3);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub Accessories</h4>
+                    <p class="text-secondary">Premium gaming gear for the ultimate gaming setup.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="shipping.html" class="text-secondary text-decoration-none me-3">Shipping Info</a>
+                        <a href="warranty.html" class="text-secondary text-decoration-none">Warranty</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="background: var(--card-bg); border: 2px solid var(--neon-blue);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title cyber-font">Your Cart</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItems">
+                    </div>
+                    <div class="text-center py-4" id="emptyCartMessage">
+                        <i class="fas fa-shopping-cart fa-3x text-secondary mb-3"></i>
+                        <h4>Your cart is empty</h4>
+                        <p class="text-secondary">Add some accessories to get started!</p>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <div class="w-100">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Total:</span>
+                            <span class="price-tag" id="cartTotal">$0.00</span>
+                        </div>
+                        <button class="btn buy-btn w-100" onclick="checkout()">
+                            <i class="fas fa-lock me-2"></i>Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        const accessories = [
+            {
+                id: 1,
+                name: 'Razer BlackWidow V3',
+                category: 'Keyboards',
+                brand: 'Razer',
+                price: 129.99,
+                discount: 15,
+                rating: 4.5,
+                image: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                description: 'Mechanical gaming keyboard with RGB lighting',
+                compatibility: ['PC', 'Mac'],
+                features: ['Mechanical Switches', 'RGB Lighting', 'Wrist Rest']
+            },
+            {
+                id: 2,
+                name: 'Logitech G Pro Wireless',
+                category: 'Mice',
+                brand: 'Logitech',
+                price: 149.99,
+                discount: 10,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                description: 'Lightweight wireless gaming mouse',
+                compatibility: ['PC'],
+                features: ['Wireless', 'Lightweight', 'Hero Sensor']
+            },
+            {
+                id: 3,
+                name: 'SteelSeries Arctis 7',
+                category: 'Headsets',
+                brand: 'SteelSeries',
+                price: 149.99,
+                discount: 20,
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                description: 'Wireless gaming headset with premium audio',
+                compatibility: ['PC', 'PS5', 'Switch'],
+                features: ['Wireless', 'Noise Cancelling', '24h Battery']
+            },
+            {
+                id: 4,
+                name: 'Xbox Elite Series 2',
+                category: 'Controllers',
+                brand: 'Xbox',
+                price: 179.99,
+                discount: 0,
+                rating: 4.6,
+                image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                description: 'Premium customizable controller',
+                compatibility: ['Xbox', 'PC'],
+                features: ['Customizable', 'Wireless', 'Rechargeable']
+            },
+            {
+                id: 5,
+                name: 'ASUS ROG Swift',
+                category: 'Monitors',
+                brand: 'ASUS ROG',
+                price: 449.99,
+                discount: 25,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                description: '27" 1440p 165Hz gaming monitor',
+                compatibility: ['PC', 'PS5', 'Xbox'],
+                features: ['1440p', '165Hz', 'G-Sync']
+            },
+            {
+                id: 6,
+                name: 'Secretlab Titan Evo',
+                category: 'Chairs',
+                brand: 'Secretlab',
+                price: 549.99,
+                discount: 0,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                description: 'Premium ergonomic gaming chair',
+                compatibility: ['All'],
+                features: ['Ergonomic', 'Memory Foam', 'Adjustable']
+            },
+            {
+                id: 7,
+                name: 'Corsair K70 RGB',
+                category: 'Keyboards',
+                brand: 'Corsair',
+                price: 169.99,
+                discount: 30,
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                description: 'Mechanical keyboard with Cherry MX switches',
+                compatibility: ['PC', 'Mac'],
+                features: ['Cherry MX', 'RGB', 'Aluminum Frame']
+            },
+            {
+                id: 8,
+                name: 'PlayStation DualSense',
+                category: 'Controllers',
+                brand: 'PlayStation',
+                price: 69.99,
+                discount: 0,
+                rating: 4.5,
+                image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+                description: 'Wireless controller with haptic feedback',
+                compatibility: ['PS5', 'PC'],
+                features: ['Haptic Feedback', 'Adaptive Triggers', 'Wireless']
+            },
+            {
+                id: 9,
+                name: 'HyperX Cloud Alpha',
+                category: 'Headsets',
+                brand: 'HyperX',
+                price: 99.99,
+                discount: 15,
+                rating: 4.4,
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+                description: 'Wired gaming headset with dual chamber drivers',
+                compatibility: ['PC', 'PS4', 'Xbox'],
+                features: ['Noise Cancelling', 'Comfortable', 'Dual Chamber']
+            }
+        ];
+
+        let cart = [];
+        
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 50, density: { enable: true, value_area: 800 } },
+                color: { value: "#b967ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#ff2a6d",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAccessories();
+            updateCartCount();
+            
+            const priceRange = document.getElementById('priceRange');
+            const maxPrice = document.getElementById('maxPrice');
+            
+            priceRange.addEventListener('input', function() {
+                maxPrice.textContent = '$' + this.value;
+            });
+        });
+
+        function loadAccessories(filtered = accessories) {
+            const grid = document.getElementById('accessoriesGrid');
+            grid.innerHTML = '';
+            
+            filtered.forEach((accessory, index) => {
+                const finalPrice = accessory.price * (1 - (accessory.discount || 0) / 100);
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.innerHTML = `
+                    <div class="accessory-card animate-in" style="animation-delay: ${0.1 * index}s">
+                        ${accessory.discount ? `<span class="discount-badge">-${accessory.discount}%</span>` : ''}
+                        
+                        <img src="${accessory.image}" alt="${accessory.name}" class="accessory-img">
+                        
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="${accessory.brand.toLowerCase().replace(/\s+/g, '-')}" 
+                                 style="width: 30px; height: 30px; background: var(--card-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <h5 class="cyber-font mb-0 flex-grow-1">${accessory.name}</h5>
+                        </div>
+                        
+                        <div class="rating mb-2">
+                            ${getStarRating(accessory.rating)}
+                        </div>
+                        
+                        <p class="text-secondary small mb-3">${accessory.description}</p>
+                        
+                        <div class="mb-3">
+                            ${accessory.compatibility.map(comp => 
+                                `<span class="compatibility-badge">${comp}</span>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                ${accessory.discount ? `
+                                    <span class="text-decoration-line-through text-secondary">$${accessory.price.toFixed(2)}</span>
+                                    <span class="price-tag ms-2">$${finalPrice.toFixed(2)}</span>
+                                ` : `<span class="price-tag">$${accessory.price.toFixed(2)}</span>`}
+                            </div>
+                            <span class="category-badge">${accessory.category}</span>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="changeQuantity(${accessory.id}, -1)">-</button>
+                                <input type="text" class="quantity-input" id="qty-${accessory.id}" value="1" readonly>
+                                <button class="quantity-btn" onclick="changeQuantity(${accessory.id}, 1)">+</button>
+                            </div>
+                            <button class="btn buy-btn flex-grow-1" onclick="addToCart(${accessory.id})">
+                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getStarRating(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        function changeQuantity(id, change) {
+            const input = document.getElementById(`qty-${id}`);
+            let value = parseInt(input.value) + change;
+            if (value < 1) value = 1;
+            if (value > 10) value = 10;
+            input.value = value;
+        }
+
+        function addToCart(id) {
+            if (id === 'featured') {
+                alert('Featured product added to cart!');
+                return;
+            }
+            
+            const accessory = accessories.find(a => a.id === id);
+            const quantity = parseInt(document.getElementById(`qty-${id}`).value);
+            
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    ...accessory,
+                    quantity: quantity
+                });
+            }
+            
+            updateCartCount();
+            
+            showNotification(`${accessory.name} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'position-fixed bottom-0 end-0 m-3 p-3 rounded';
+            notification.style.background = 'linear-gradient(45deg, var(--neon-purple), var(--neon-pink))';
+            notification.style.color = 'white';
+            notification.style.zIndex = '9999';
+            notification.style.maxWidth = '300px';
+            notification.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <div>${message}</div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function viewCart() {
+            const modal = new bootstrap.Modal(document.getElementById('cartModal'));
+            const cartItems = document.getElementById('cartItems');
+            const emptyCart = document.getElementById('emptyCartMessage');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '';
+                emptyCart.style.display = 'block';
+                cartTotal.textContent = '$0.00';
+            } else {
+                emptyCart.style.display = 'none';
+                
+                let total = 0;
+                cartItems.innerHTML = cart.map(item => {
+                    const price = item.price * (1 - (item.discount || 0) / 100);
+                    const itemTotal = price * item.quantity;
+                    total += itemTotal;
+                    
+                    return `
+                        <div class="d-flex align-items-center p-3 border-bottom" style="border-color: rgba(0, 243, 255, 0.1) !important;">
+                            <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain; border-radius: 10px; margin-right: 1rem;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">${item.name}</h6>
+                                <small class="text-secondary">${item.category} • ${item.brand}</small>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="quantity-controls">
+                                        <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                        <span class="mx-2">${item.quantity}</span>
+                                        <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                                    </div>
+                                    <span class="price-tag">$${itemTotal.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger ms-2" onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+                
+                cartTotal.textContent = `$${total.toFixed(2)}`;
+            }
+            
+            modal.show();
+        }
+
+        function updateCartQuantity(id, newQuantity) {
+            if (newQuantity < 1) {
+                removeFromCart(id);
+                return;
+            }
+            
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity = newQuantity;
+                updateCartCount();
+                viewCart(); 
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartCount();
+            viewCart(); 
+        }
+
+        function applyFilters() {
+            const maxPrice = parseInt(document.getElementById('priceRange').value);
+            const selectedBrand = document.getElementById('brandSelect').value;
+            const selectedCompatibility = document.getElementById('compatibilitySelect').value;
+            
+            let filtered = accessories.filter(accessory => {
+                const price = accessory.price * (1 - (accessory.discount || 0) / 100);
+                if (price > maxPrice) return false;
+                
+                if (selectedBrand && accessory.brand !== selectedBrand) return false;
+                
+                if (selectedCompatibility && !accessory.compatibility.includes(selectedCompatibility)) {
+                    return false;
+                }
+                
+                const categories = [
+                    'categoryHeadsets',
+                    'categoryKeyboards', 
+                    'categoryMice',
+                    'categoryControllers',
+                    'categoryMonitors',
+                    'categoryChairs'
+                ];
+                
+                const anyCategoryChecked = categories.some(cat => document.getElementById(cat)?.checked);
+                if (anyCategoryChecked) {
+                    const categoryMap = {
+                        'categoryHeadsets': 'Headsets',
+                        'categoryKeyboards': 'Keyboards',
+                        'categoryMice': 'Mice',
+                        'categoryControllers': 'Controllers',
+                        'categoryMonitors': 'Monitors',
+                        'categoryChairs': 'Chairs'
+                    };
+                    
+                    const selectedCategories = categories
+                        .filter(cat => document.getElementById(cat)?.checked)
+                        .map(cat => categoryMap[cat]);
+                    
+                    if (!selectedCategories.includes(accessory.category)) return false;
+                }
+                
+                return true;
+            });
+            
+            loadAccessories(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('priceRange').value = 500;
+            document.getElementById('maxPrice').textContent = '$500';
+            document.getElementById('brandSelect').value = '';
+            document.getElementById('compatibilitySelect').value = '';
+            
+            ['categoryAll', 'categoryHeadsets', 'categoryKeyboards', 'categoryMice', 
+             'categoryControllers', 'categoryMonitors', 'categoryChairs'].forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) checkbox.checked = false;
+            });
+            
+            document.getElementById('categoryAll').checked = true;
+            
+            loadAccessories(accessories);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+            
+            setTimeout(() => {
+                const total = cart.reduce((sum, item) => {
+                    const price = item.price * (1 - (item.discount || 0) / 100);
+                    return sum + (price * item.quantity);
+                }, 0);
+                
+                if (confirm(`Proceed to checkout with total: $${total.toFixed(2)}?`)) {
+                    alert('Thank you for your purchase! You will be redirected to the payment page.');
+                    cart = [];
+                    updateCartCount();
+                }
+            }, 300);
+        }
+    </script>
+</body>
+</html>

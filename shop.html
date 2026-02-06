@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .shop-header {
+            padding: 160px 0 60px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border-bottom: 2px solid var(--neon-blue);
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 1rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .buy-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(185, 103, 255, 0.3);
+        }
+        
+        .shop-card {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .price-tag {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: inline-block;
+        }
+        
+        .discount-badge {
+            background: var(--neon-pink);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .game-select {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .game-select:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            outline: none;
+        }
+        
+        .quantity-input {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.5rem;
+            text-align: center;
+            width: 70px;
+        }
+        
+        .store-option {
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(10, 10, 15, 0.6);
+        }
+        
+        .store-option:hover, .store-option.selected {
+            border-color: var(--neon-blue);
+            background: rgba(0, 243, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .payment-method {
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover, .payment-method.selected {
+            border-color: var(--neon-blue);
+            background: rgba(0, 243, 255, 0.1);
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+        
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-blue);
+        }
+        
+        .steam-icon { color: #171A21; }
+        .epic-icon { color: #2A2A2A; }
+        .playstation-icon { color: #003087; }
+        .xbox-icon { color: #107C10; }
+        .nintendo-icon { color: #E60012; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="shop.html">Shop</a>
+                    </li>
+                </ul>
+                <div>
+                    <a href="index.html" class="btn cyber-btn cyber-font">
+                        <i class="fas fa-home me-2"></i>Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="shop-content">
+    </div>
+
+    <footer class="pt-5 pb-4 mt-5" style="background: rgba(10, 10, 15, 0.95); border-top: 2px solid rgba(0, 243, 255, 0.3);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub Shop</h4>
+                    <p class="text-secondary">Get the best deals on your favorite games.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="refund.html" class="text-secondary text-decoration-none me-3">Refund Policy</a>
+                        <a href="contact.html" class="text-secondary text-decoration-none">Support</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: var(--card-bg); border: 2px solid var(--neon-blue);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title cyber-font text-success">Purchase Successful!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-check-circle text-success mb-3" style="font-size: 4rem;"></i>
+                    <h4 class="mb-3">Thank you for your purchase!</h4>
+                    <p>Your game key will be sent to your email within 24 hours.</p>
+                    <p class="text-secondary">Order ID: <span id="orderId">GAME-</span></p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button class="btn buy-btn w-100" data-bs-dismiss="modal">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        const shopGames = {
+            'elden-ring': {
+                title: 'Elden Ring',
+                price: 59.99,
+                discount: 10,
+                image: 'https://images.unsplash.com/photo-1633265486064-086b219458ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                platforms: ['PC', 'PS5', 'Xbox Series X/S', 'PS4', 'Xbox One'],
+                description: 'An epic open-world RPG from FromSoftware',
+                features: ['Open World', 'Souls-like Combat', 'Co-op Multiplayer', 'Character Customization'],
+                stores: [
+                    { name: 'Steam', icon: 'fab fa-steam', color: 'steam-icon' },
+                    { name: 'PlayStation Store', icon: 'fab fa-playstation', color: 'playstation-icon' },
+                    { name: 'Xbox Store', icon: 'fab fa-xbox', color: 'xbox-icon' }
+                ]
+            },
+            'god-of-war': {
+                title: 'God of War Ragnarök',
+                price: 69.99,
+                discount: 15,
+                image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                platforms: ['PS5', 'PS4'],
+                description: 'Continue the epic journey of Kratos and Atreus',
+                features: ['Action Adventure', 'Story Rich', 'Single Player', 'Stunning Graphics'],
+                stores: [
+                    { name: 'PlayStation Store', icon: 'fab fa-playstation', color: 'playstation-icon' }
+                ]
+            },
+            'cyberpunk': {
+                title: 'Cyberpunk 2077',
+                price: 49.99,
+                discount: 30,
+                image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                platforms: ['PC', 'PS5', 'Xbox Series X/S', 'PS4', 'Xbox One'],
+                description: 'Open-world RPG set in Night City',
+                features: ['Cyberpunk Setting', 'RPG', 'First Person', 'Character Customization'],
+                stores: [
+                    { name: 'Steam', icon: 'fab fa-steam', color: 'steam-icon' },
+                    { name: 'GOG', icon: 'fas fa-gamepad', color: 'epic-icon' },
+                    { name: 'PlayStation Store', icon: 'fab fa-playstation', color: 'playstation-icon' },
+                    { name: 'Xbox Store', icon: 'fab fa-xbox', color: 'xbox-icon' }
+                ]
+            },
+            'hollow-knight': {
+                title: 'Hollow Knight',
+                price: 14.99,
+                discount: 20,
+                image: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                platforms: ['PC', 'Switch', 'PS4', 'Xbox One'],
+                description: 'Beautiful hand-drawn metroidvania adventure',
+                features: ['Metroidvania', 'Hand-drawn', 'Exploration', 'Challenging'],
+                stores: [
+                    { name: 'Steam', icon: 'fab fa-steam', color: 'steam-icon' },
+                    { name: 'Nintendo eShop', icon: 'fas fa-gamepad', color: 'nintendo-icon' }
+                ]
+            },
+            'doom-eternal': {
+                title: 'DOOM Eternal',
+                price: 39.99,
+                discount: 25,
+                image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                platforms: ['PC', 'PS5', 'Xbox Series X/S', 'PS4', 'Xbox One', 'Switch'],
+                description: 'Fast-paced demon-slaying FPS',
+                features: ['First Person Shooter', 'Action', 'Gore', 'Multiplayer'],
+                stores: [
+                    { name: 'Steam', icon: 'fab fa-steam', color: 'steam-icon' },
+                    { name: 'PlayStation Store', icon: 'fab fa-playstation', color: 'playstation-icon' },
+                    { name: 'Xbox Store', icon: 'fab fa-xbox', color: 'xbox-icon' }
+                ]
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('game');
+        const storeParam = urlParams.get('store');
+        const game = shopGames[gameId];
+
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 40, density: { enable: true, value_area: 800 } },
+                color: { value: "#00f3ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#b967ff",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!gameId) {
+                loadAllGames();
+            } else if (!game) {
+                document.getElementById('shop-content').innerHTML = `
+                    <header class="shop-header">
+                        <div class="container text-center">
+                            <h1 class="cyber-font display-4 mb-3">Game Not Found</h1>
+                            <p>Sorry, the requested game could not be found.</p>
+                            <a href="shop.html" class="btn cyber-btn mt-3">Browse All Games</a>
+                        </div>
+                    </header>
+                `;
+            } else {
+                loadGamePurchase();
+            }
+
+            const animatedElements = document.querySelectorAll('.animate-in');
+            animatedElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * (index + 1));
+            });
+        });
+
+        function loadAllGames() {
+            const content = `
+                <header class="shop-header">
+                    <div class="container text-center">
+                        <h1 class="cyber-font display-4 mb-3">GameHub Shop</h1>
+                        <p class="lead">Get the best deals on your favorite games</p>
+                        <div class="mt-4">
+                            <span class="badge bg-primary me-2">${Object.keys(shopGames).length} Games</span>
+                            <span class="badge bg-success me-2">Up to 30% Off</span>
+                            <span class="badge bg-warning">Instant Delivery</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="container py-5">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- Filters -->
+                            <div class="shop-card animate-in">
+                                <h4 class="cyber-font mb-3">Filters</h4>
+                                <div class="mb-3">
+                                    <label class="form-label mb-2">Platform</label>
+                                    <select class="game-select">
+                                        <option>All Platforms</option>
+                                        <option>PC</option>
+                                        <option>PlayStation</option>
+                                        <option>Xbox</option>
+                                        <option>Nintendo Switch</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label mb-2">Price Range</label>
+                                    <select class="game-select">
+                                        <option>All Prices</option>
+                                        <option>Under $20</option>
+                                        <option>$20 - $40</option>
+                                        <option>$40 - $60</option>
+                                        <option>Over $60</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label mb-2">Genre</label>
+                                    <select class="game-select">
+                                        <option>All Genres</option>
+                                        <option>Action</option>
+                                        <option>RPG</option>
+                                        <option>Adventure</option>
+                                        <option>FPS</option>
+                                    </select>
+                                </div>
+                                <button class="btn cyber-btn w-100">Apply Filters</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="row">
+                                ${Object.entries(shopGames).map(([id, game], index) => `
+                                    <div class="col-md-6 col-lg-4 mb-4">
+                                        <div class="shop-card animate-in" style="animation-delay: ${0.1 * (index + 1)}s">
+                                            ${game.discount ? `<span class="discount-badge">-${game.discount}%</span>` : ''}
+                                            <img src="${game.image}" alt="${game.title}" class="img-fluid rounded mb-3" style="height: 180px; width: 100%; object-fit: cover;">
+                                            <h5 class="cyber-font mb-2">${game.title}</h5>
+                                            <p class="text-secondary small mb-3">${game.description}</p>
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    ${game.discount ? `
+                                                        <span class="text-decoration-line-through text-secondary me-2">$${game.price}</span>
+                                                        <span class="price-tag">$${(game.price * (1 - game.discount/100)).toFixed(2)}</span>
+                                                    ` : `<span class="price-tag">$${game.price}</span>`}
+                                                </div>
+                                                <div>
+                                                    ${game.platforms.slice(0, 2).map(p => `<span class="badge bg-secondary me-1">${p}</span>`).join('')}
+                                                </div>
+                                            </div>
+                                            <a href="shop.html?game=${id}" class="btn buy-btn w-100">
+                                                <i class="fas fa-shopping-cart me-2"></i>Buy Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            `;
+            
+            document.getElementById('shop-content').innerHTML = content;
+        }
+
+        function loadGamePurchase() {
+            const finalPrice = game.price * (1 - (game.discount || 0) / 100);
+            
+            const content = `
+                <header class="shop-header">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 animate-in">
+                                <h1 class="cyber-font display-4 mb-3">Purchase ${game.title}</h1>
+                                <p class="lead mb-4">Complete your purchase below</p>
+                                <a href="shop.html" class="btn cyber-btn">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to Shop
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="container py-5">
+                    <div class="row">
+                        <!-- Left Column - Game Info -->
+                        <div class="col-lg-8">
+                            <div class="shop-card animate-in" style="animation-delay: 0.1s">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="${game.image}" alt="${game.title}" class="img-fluid rounded mb-3" style="height: 200px; width: 100%; object-fit: cover;">
+                                        ${game.discount ? `<span class="discount-badge">-${game.discount}%</span>` : ''}
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3 class="cyber-font mb-3">${game.title}</h3>
+                                        <p class="mb-3">${game.description}</p>
+                                        
+                                        <div class="mb-3">
+                                            <strong>Platforms:</strong>
+                                            <div class="mt-1">
+                                                ${game.platforms.map(platform => `<span class="badge bg-secondary me-1">${platform}</span>`).join('')}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <strong>Features:</strong>
+                                            <div class="mt-1">
+                                                ${game.features.map(feature => `<span class="badge bg-primary me-1 mb-1">${feature}</span>`).join('')}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Platform Selection -->
+                            <div class="shop-card animate-in mt-4" style="animation-delay: 0.2s">
+                                <h4 class="cyber-font mb-3">Select Platform</h4>
+                                <div class="row g-3">
+                                    ${game.platforms.map(platform => `
+                                        <div class="col-md-4">
+                                            <div class="store-option" onclick="selectPlatform(this, '${platform}')">
+                                                <div class="text-center">
+                                                    <i class="fas fa-gamepad fa-2x mb-2"></i>
+                                                    <div>${platform}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Store Selection -->
+                            <div class="shop-card animate-in mt-4" style="animation-delay: 0.3s">
+                                <h4 class="cyber-font mb-3">Select Store</h4>
+                                <div class="row g-3">
+                                    ${game.stores.map(store => `
+                                        <div class="col-md-6">
+                                            <div class="store-option ${storeParam === store.name.toLowerCase() ? 'selected' : ''}" 
+                                                 onclick="selectStore(this, '${store.name}')">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="${store.icon} ${store.color} fa-2x me-3"></i>
+                                                    <div>
+                                                        <div class="fw-bold">${store.name}</div>
+                                                        <div class="text-secondary small">Instant Delivery</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Checkout -->
+                        <div class="col-lg-4">
+                            <div class="shop-card animate-in" style="animation-delay: 0.4s">
+                                <h4 class="cyber-font mb-4">Order Summary</h4>
+                                
+                                <div class="summary-item">
+                                    <span>${game.title}</span>
+                                    <span>$${game.price.toFixed(2)}</span>
+                                </div>
+                                
+                                ${game.discount ? `
+                                <div class="summary-item">
+                                    <span>Discount (${game.discount}%)</span>
+                                    <span class="text-success">-$${(game.price * game.discount/100).toFixed(2)}</span>
+                                </div>
+                                ` : ''}
+                                
+                                <div class="summary-item">
+                                    <span>Platform Fee</span>
+                                    <span>$2.99</span>
+                                </div>
+                                
+                                <div class="summary-item">
+                                    <span>Tax</span>
+                                    <span>$${(finalPrice * 0.08).toFixed(2)}</span>
+                                </div>
+                                
+                                <div class="summary-item mt-4 pt-3 border-top">
+                                    <span class="total-amount">Total</span>
+                                    <span class="total-amount">$${(finalPrice + 2.99 + (finalPrice * 0.08)).toFixed(2)}</span>
+                                </div>
+                                
+                                <!-- Payment Methods -->
+                                <div class="mt-4">
+                                    <h5 class="mb-3">Payment Method</h5>
+                                    <div class="row g-2 mb-3">
+                                        <div class="col-6">
+                                            <div class="payment-method" onclick="selectPayment(this, 'card')">
+                                                <div class="text-center">
+                                                    <i class="fas fa-credit-card fa-2x mb-2"></i>
+                                                    <div>Credit Card</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="payment-method" onclick="selectPayment(this, 'paypal')">
+                                                <div class="text-center">
+                                                    <i class="fab fa-paypal fa-2x mb-2"></i>
+                                                    <div>PayPal</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Purchase Button -->
+                                <button class="btn buy-btn w-100 mt-4" onclick="completePurchase()">
+                                    <i class="fas fa-lock me-2"></i>Complete Purchase
+                                </button>
+                                
+                                <div class="text-center mt-3">
+                                    <small class="text-secondary">
+                                        <i class="fas fa-shield-alt me-1"></i>Secure 256-bit SSL Encryption
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <!-- Support Info -->
+                            <div class="shop-card animate-in mt-4" style="animation-delay: 0.5s">
+                                <h6 class="cyber-font mb-3">What you get:</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Instant digital delivery</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Official game key</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>24/7 customer support</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>14-day refund guarantee</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            `;
+            
+            document.getElementById('shop-content').innerHTML = content;
+            
+            if (storeParam) {
+                setTimeout(() => {
+                    const storeElements = document.querySelectorAll('.store-option');
+                    storeElements.forEach(el => {
+                        if (el.textContent.toLowerCase().includes(storeParam)) {
+                            selectStore(el, storeParam);
+                        }
+                    });
+                }, 100);
+            }
+        }
+
+        window.selectPlatform = function(element, platform) {
+            document.querySelectorAll('.store-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        };
+
+        window.selectStore = function(element, store) {
+            document.querySelectorAll('.store-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        };
+
+        window.selectPayment = function(element, method) {
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        };
+
+        window.completePurchase = function() {
+            const orderId = 'GAME-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            document.getElementById('orderId').textContent = orderId;
+            
+            new bootstrap.Modal(document.getElementById('successModal')).show();
+        };
+    </script>
+</body>
+</html>

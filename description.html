@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Game Description</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .game-header {
+            padding: 160px 0 60px;
+            background: linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)),
+                        var(--header-bg);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+        
+        .game-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(0, 243, 255, 0.1), 
+                rgba(185, 103, 255, 0.1));
+            z-index: -1;
+        }
+        
+        .game-score {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border: 4px solid white;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+        }
+        
+        .game-tag {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            border-radius: 20px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar-cyber {
+            height: 10px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 5px;
+        }
+        
+        .detail-section {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .system-req {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .screenshot-item {
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+        }
+        
+        .screenshot-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .review-highlight {
+            background: rgba(0, 243, 255, 0.05);
+            border-left: 4px solid var(--neon-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .buy-options {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(185, 103, 255, 0.3);
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-blue);
+            color: var(--text-primary);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                </ul>
+                <div>
+                    <a href="reviews.html" class="btn cyber-btn cyber-font">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Reviews
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="game-content">
+    </div>
+
+    <footer class="pt-5 pb-4 mt-5" style="background: rgba(10, 10, 15, 0.95); border-top: 2px solid rgba(0, 243, 255, 0.3);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub</h4>
+                    <p class="text-secondary">Your ultimate destination for honest game reviews and insights.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="#" class="text-secondary text-decoration-none me-3">Privacy Policy</a>
+                        <a href="#" class="text-secondary text-decoration-none">Contact</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="screenshotModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title cyber-font">Screenshot</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Screenshot" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        const games = {
+            'elden-ring': {
+                title: 'Elden Ring',
+                score: 9.5,
+                rating: '★★★★★',
+                genre: ['Action RPG', 'Open World', 'Souls-like'],
+                platforms: ['PC', 'PS5', 'Xbox Series X/S', 'PS4', 'Xbox One'],
+                releaseDate: 'February 25, 2022',
+                developer: 'FromSoftware',
+                publisher: 'Bandai Namco',
+                headerBg: 'linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)), url("https://images.unsplash.com/photo-1633265486064-086b219458ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80")',
+                screenshots: [
+                    'https://images.unsplash.com/photo-1633265486064-086b219458ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1633265486064-086b219458ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                description: 'Elden Ring is a masterpiece of open-world design and challenging gameplay. Developed by FromSoftware and written in collaboration with George R.R. Martin, the game presents a vast, interconnected world filled with mystery, danger, and awe-inspiring vistas.',
+                
+                review: {
+                    summary: 'Elden Ring represents the pinnacle of FromSoftware\'s design philosophy, merging their signature challenging combat with a breathtaking open world that rewards exploration at every turn.',
+                    pros: [
+                        'Massive, intricately designed open world',
+                        'Incredible boss fights and combat mechanics',
+                        'Deep lore and environmental storytelling',
+                        'Unparalleled sense of discovery',
+                        'Customizable character progression'
+                    ],
+                    cons: [
+                        'Extreme difficulty may frustrate some players',
+                        'Occasional performance issues on PC',
+                        'Story can be obscure for newcomers to Souls games'
+                    ],
+                    categories: {
+                        gameplay: 95,
+                        graphics: 92,
+                        story: 88,
+                        performance: 90,
+                        sound: 94
+                    }
+                },
+                
+                systemRequirements: {
+                    minimum: {
+                        os: 'Windows 10',
+                        processor: 'Intel Core i5-8400 / AMD Ryzen 3 3300X',
+                        memory: '12 GB RAM',
+                        graphics: 'NVIDIA GeForce GTX 1060 3GB / AMD Radeon RX 580 4GB',
+                        storage: '60 GB'
+                    },
+                    recommended: {
+                        os: 'Windows 10/11',
+                        processor: 'Intel Core i7-8700K / AMD Ryzen 5 3600X',
+                        memory: '16 GB RAM',
+                        graphics: 'NVIDIA GeForce GTX 1070 8GB / AMD Radeon RX VEGA 56 8GB',
+                        storage: '60 GB SSD'
+                    }
+                },
+                
+                price: 59.99,
+                stores: [
+                    { name: 'Steam', url: '#', icon: 'fab fa-steam' },
+                    { name: 'PlayStation Store', url: '#', icon: 'fab fa-playstation' },
+                    { name: 'Xbox Store', url: '#', icon: 'fab fa-xbox' }
+                ]
+            },
+            
+            'god-of-war': {
+                title: 'God of War Ragnarök',
+                score: 9.7,
+                rating: '★★★★★',
+                genre: ['Action', 'Adventure', 'Story-Rich'],
+                platforms: ['PS5', 'PS4'],
+                releaseDate: 'November 9, 2022',
+                developer: 'Santa Monica Studio',
+                publisher: 'Sony Interactive Entertainment',
+                headerBg: 'linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)), url("https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80")',
+                screenshots: [
+                    'https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                description: 'God of War Ragnarök continues the epic journey of Kratos and Atreus as they navigate the frozen Norse realms while preparing for the prophesied battle that will end the world.',
+                
+                review: {
+                    summary: 'A masterclass in character development and narrative storytelling, combined with visceral combat that feels both familiar and refreshingly new.',
+                    pros: [
+                        'Emotionally compelling story and character development',
+                        'Stunning visual presentation and art direction',
+                        'Satisfying and varied combat mechanics',
+                        'Excellent voice acting and soundtrack',
+                        'Meaningful side content and exploration'
+                    ],
+                    cons: [
+                        'Some puzzles can feel repetitive',
+                        'Limited enemy variety in certain areas',
+                        'PS4 version has noticeable graphical compromises'
+                    ],
+                    categories: {
+                        gameplay: 94,
+                        graphics: 98,
+                        story: 96,
+                        performance: 95,
+                        sound: 97
+                    }
+                },
+                
+                systemRequirements: {
+                    minimum: {
+                        os: 'PS4 System Software',
+                        storage: '106 GB minimum'
+                    },
+                    recommended: {
+                        os: 'PS5 System Software',
+                        storage: '106 GB SSD'
+                    }
+                },
+                
+                price: 69.99,
+                stores: [
+                    { name: 'PlayStation Store', url: '#', icon: 'fab fa-playstation' }
+                ]
+            },
+            
+            'cyberpunk': {
+                title: 'Cyberpunk 2077',
+                score: 8.3,
+                rating: '★★★★☆',
+                genre: ['RPG', 'FPS', 'Cyberpunk'],
+                platforms: ['PC', 'PS5', 'Xbox Series X/S', 'PS4', 'Xbox One'],
+                releaseDate: 'December 10, 2020',
+                developer: 'CD Projekt Red',
+                publisher: 'CD Projekt',
+                headerBg: 'linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)), url("https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80")',
+                screenshots: [
+                    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                description: 'Cyberpunk 2077 is an open-world, action-adventure RPG set in Night City, a megalopolis obsessed with power, glamour and body modification.',
+                
+                review: {
+                    summary: 'A flawed masterpiece with an incredible world and story, now fully realized after extensive patches and updates. Night City remains one of gaming\'s most immersive settings.',
+                    pros: [
+                        'Incredibly detailed and immersive world',
+                        'Strong narrative with meaningful choices',
+                        'Excellent voice acting, especially Keanu Reeves',
+                        'Phantom Liberty expansion adds tremendous value',
+                        'Great character customization and build variety'
+                    ],
+                    cons: [
+                        'Still has some technical issues on last-gen consoles',
+                        'AI behavior can be inconsistent',
+                        'Driving mechanics feel floaty',
+                        'Some systems feel underdeveloped'
+                    ],
+                    categories: {
+                        gameplay: 85,
+                        graphics: 90,
+                        story: 88,
+                        performance: 82,
+                        sound: 92
+                    }
+                },
+                
+                systemRequirements: {
+                    minimum: {
+                        os: 'Windows 10',
+                        processor: 'Intel Core i5-3570K / AMD FX-8310',
+                        memory: '8 GB RAM',
+                        graphics: 'NVIDIA GeForce GTX 780 3GB / AMD Radeon RX 470',
+                        storage: '70 GB SSD'
+                    },
+                    recommended: {
+                        os: 'Windows 10',
+                        processor: 'Intel Core i7-4790 / AMD Ryzen 3 3200G',
+                        memory: '12 GB RAM',
+                        graphics: 'NVIDIA GeForce GTX 1060 6GB / AMD Radeon R9 Fury',
+                        storage: '70 GB SSD'
+                    }
+                },
+                
+                price: 49.99,
+                stores: [
+                    { name: 'Steam', url: '#', icon: 'fab fa-steam' },
+                    { name: 'GOG', url: '#', icon: 'fas fa-gamepad' },
+                    { name: 'PlayStation Store', url: '#', icon: 'fab fa-playstation' },
+                    { name: 'Xbox Store', url: '#', icon: 'fab fa-xbox' }
+                ]
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('game') || 'elden-ring';
+        const game = games[gameId];
+
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 50, density: { enable: true, value_area: 800 } },
+                color: { value: "#00f3ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#b967ff",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!game) {
+                document.getElementById('game-content').innerHTML = `
+                    <div class="container py-5 text-center">
+                        <h1 class="cyber-font">Game Not Found</h1>
+                        <p>Sorry, the requested game could not be found.</p>
+                        <a href="reviews.html" class="btn cyber-btn mt-3">Back to Reviews</a>
+                    </div>
+                `;
+                return;
+            }
+
+            document.title = `GameHub | ${game.title}`;
+            
+            const content = `
+                <!-- Game Header -->
+                <header class="game-header" style="background: ${game.headerBg}">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8 animate-in">
+                                <h1 class="cyber-font display-4 mb-3">${game.title}</h1>
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="game-score me-4">${game.score}</div>
+                                    <div>
+                                        <div class="text-warning mb-2" style="font-size: 1.5rem;">${game.rating}</div>
+                                        <div class="text-secondary">GameHub Review Score</div>
+                                    </div>
+                                </div>
+                                <p class="lead mb-4">${game.description}</p>
+                                <div class="mb-4">
+                                    ${game.genre.map(tag => `<span class="game-tag">${tag}</span>`).join('')}
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    ${game.platforms.map(platform => `<span class="badge bg-secondary">${platform}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="container py-5">
+                    <div class="row">
+                        <!-- Left Column -->
+                        <div class="col-lg-8">
+                            <!-- Review Summary -->
+                            <section class="detail-section animate-in" style="animation-delay: 0.1s">
+                                <h3 class="cyber-font mb-4">Review Summary</h3>
+                                <p class="mb-4">${game.review.summary}</p>
+                                
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <h5 class="mb-3">Pros</h5>
+                                        <ul class="list-unstyled">
+                                            ${game.review.pros.map(pro => `<li class="mb-2"><i class="fas fa-check text-success me-2"></i>${pro}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="mb-3">Cons</h5>
+                                        <ul class="list-unstyled">
+                                            ${game.review.cons.map(con => `<li class="mb-2"><i class="fas fa-times text-danger me-2"></i>${con}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Detailed Ratings -->
+                            <section class="detail-section animate-in" style="animation-delay: 0.2s">
+                                <h3 class="cyber-font mb-4">Detailed Ratings</h3>
+                                ${Object.entries(game.review.categories).map(([category, score]) => `
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="text-capitalize">${category}</span>
+                                            <span>${score}%</span>
+                                        </div>
+                                        <div class="progress" style="height: 10px;">
+                                            <div class="progress-bar-cyber" style="width: ${score}%"></div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </section>
+
+                            <!-- Screenshots -->
+                            <section class="detail-section animate-in" style="animation-delay: 0.3s">
+                                <h3 class="cyber-font mb-4">Screenshots</h3>
+                                <div class="screenshot-gallery">
+                                    ${game.screenshots.map((screenshot, index) => `
+                                        <div class="screenshot-item" onclick="openScreenshot('${screenshot}')">
+                                            <img src="${screenshot}" alt="${game.title} Screenshot ${index + 1}">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-lg-4">
+                            <!-- Game Info -->
+                            <section class="detail-section animate-in" style="animation-delay: 0.4s">
+                                <h4 class="cyber-font mb-3">Game Information</h4>
+                                <div class="mb-3">
+                                    <strong>Developer:</strong>
+                                    <div class="text-secondary">${game.developer}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Publisher:</strong>
+                                    <div class="text-secondary">${game.publisher}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Release Date:</strong>
+                                    <div class="text-secondary">${game.releaseDate}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Platforms:</strong>
+                                    <div class="text-secondary">${game.platforms.join(', ')}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Genre:</strong>
+                                    <div class="text-secondary">${game.genre.join(', ')}</div>
+                                </div>
+                            </section>
+
+                            <!-- System Requirements -->
+                            <section class="detail-section animate-in" style="animation-delay: 0.5s">
+                                <h4 class="cyber-font mb-3">System Requirements</h4>
+                                <div class="mb-4">
+                                    <h6>Minimum</h6>
+                                    <div class="system-req">
+                                        ${Object.entries(game.systemRequirements.minimum).map(([key, value]) => `
+                                            <div class="mb-2"><strong>${key}:</strong> ${value}</div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                ${game.systemRequirements.recommended ? `
+                                <div>
+                                    <h6>Recommended</h6>
+                                    <div class="system-req">
+                                        ${Object.entries(game.systemRequirements.recommended).map(([key, value]) => `
+                                            <div class="mb-2"><strong>${key}:</strong> ${value}</div>
+                                        `).join('')}
+                                    </div>
+                                </div>` : ''}
+                            </section>
+
+                            <!-- Buy Now -->
+                            <section class="buy-options animate-in" style="animation-delay: 0.6s">
+                                <h4 class="cyber-font mb-3">Buy ${game.title}</h4>
+                                <div class="text-center mb-4">
+                                    <div class="display-4 mb-2">$${game.price}</div>
+                                    <div class="text-secondary mb-3">Base Game</div>
+                                </div>
+                                
+                                <div class="d-grid gap-2 mb-4">
+    <a href="shop.html?game=${gameId}" class="btn buy-btn">
+        <i class="fas fa-shopping-cart me-2"></i>Buy Now - $${game.price}
+    </a>
+    ${game.stores.slice(0, 2).map(store => `
+        <a href="shop.html?game=${gameId}&store=${store.name.toLowerCase()}" class="btn buy-btn">
+            <i class="${store.icon} me-2"></i>${store.name}
+        </a>
+    `).join('')}
+</div>
+                                
+                                <div class="text-center">
+                                    <small class="text-secondary">Prices may vary by store and region</small>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </main>
+            `;
+            
+            document.getElementById('game-content').innerHTML = content;
+
+            const animatedElements = document.querySelectorAll('.animate-in');
+            animatedElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * (index + 1));
+            });
+        });
+
+        window.openScreenshot = function(src) {
+            document.getElementById('modalImage').src = src;
+            new bootstrap.Modal(document.getElementById('screenshotModal')).show();
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.location.href = 'reviews.html';
+            }
+        });
+    </script>
+</body>
+</html>

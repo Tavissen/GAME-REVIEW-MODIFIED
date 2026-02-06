@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Community Survey</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(0, 243, 255, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, rgba(185, 103, 255, 0.03) 0%, transparent 20%);
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .survey-header {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border-bottom: 2px solid var(--neon-pink);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .survey-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
+            opacity: 0.05;
+            z-index: -1;
+        }
+        
+        .survey-card {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .survey-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.1);
+        }
+        
+        .survey-badge {
+            background: linear-gradient(45deg, var(--neon-pink), #ff6b9d);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .form-control-cyber {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control-cyber:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            outline: none;
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .form-check-input-cyber {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .form-check-input-cyber:checked {
+            background-color: var(--neon-blue);
+            border-color: var(--neon-blue);
+        }
+        
+        .form-check-input-cyber:focus {
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+        
+        .star {
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .star:hover,
+        .star.active {
+            color: #ffd700;
+            transform: scale(1.2);
+        }
+        
+        .star:hover ~ .star {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .slider-container {
+            padding: 1.5rem 0;
+        }
+        
+        .slider-value {
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            padding: 1rem 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+        }
+        
+        .submit-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+            margin-left: 10px;
+        }
+        
+        .login-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+        
+        .progress-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .progress-bar-cyber {
+            height: 10px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #28a745;
+            color: white;
+            background: rgba(19, 19, 32, 0.9);
+            border-radius: 8px;
+            padding: 1rem;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; }
+        }
+        
+        .question-counter {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .survey-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+        
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--neon-blue);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .range-slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--neon-blue);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-blue);
+            border: none;
+        }
+        
+        .platform-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+        
+        .platform-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .platform-tag:hover,
+        .platform-tag.selected {
+            background: rgba(0, 243, 255, 0.2);
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="accessories.html">Accessories</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="index.html" class="btn btn-outline-light me-2">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Home
+                    </a>
+                    <a href="login.html" class="btn login-btn cyber-font">
+                        <i class="fas fa-user me-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="survey-header">
+        <div class="container text-center">
+            <h1 class="cyber-font display-4 mb-3">GAMER SURVEY</h1>
+            <p class="lead mb-4">Help shape the future of GameHub</p>
+            <div class="survey-badge">5-7 MINUTES TO COMPLETE</div>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <form id="surveyForm">
+            <div class="progress-container">
+                <div class="progress-text">
+                    <span>Survey Progress</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress" style="height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 5px;">
+                    <div class="progress-bar-cyber" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="survey-section" id="section1">
+                <div class="question-counter">SECTION 1/5</div>
+                <h3 class="cyber-font mb-4">🎮 Your Gaming Profile</h3>
+                
+                <div class="survey-card">
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">What gaming platforms do you use regularly?</label>
+                        <div class="platform-tags">
+                            <div class="platform-tag" data-platform="pc">PC Gaming</div>
+                            <div class="platform-tag" data-platform="ps5">PlayStation 5</div>
+                            <div class="platform-tag" data-platform="xbox">Xbox Series X/S</div>
+                            <div class="platform-tag" data-platform="switch">Nintendo Switch</div>
+                            <div class="platform-tag" data-platform="mobile">Mobile Gaming</div>
+                            <div class="platform-tag" data-platform="vr">VR Gaming</div>
+                        </div>
+                        <input type="hidden" id="platforms" name="platforms">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">How many hours do you game per week?</label>
+                        <div class="slider-container">
+                            <input type="range" class="range-slider" id="hoursPerWeek" min="0" max="40" value="10">
+                            <div class="d-flex justify-content-between mt-2">
+                                <span>0-5 hours</span>
+                                <span id="hoursValue">10 hours</span>
+                                <span>35+ hours</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">Primary gaming genre preference</label>
+                        <select class="form-control-cyber" id="primaryGenre" name="primaryGenre">
+                            <option value="">Select your favorite genre</option>
+                            <option value="fps">First-Person Shooter</option>
+                            <option value="rpg">Role-Playing Games</option>
+                            <option value="strategy">Strategy</option>
+                            <option value="sports">Sports & Racing</option>
+                            <option value="adventure">Adventure & Action</option>
+                            <option value="mmo">MMO & Multiplayer</option>
+                            <option value="indie">Indie Games</option>
+                            <option value="simulation">Simulation</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="survey-section" id="section2">
+                <div class="question-counter">SECTION 2/5</div>
+                <h3 class="cyber-font mb-4">🌟 GameHub Experience</h3>
+                
+                <div class="survey-card">
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">How would you rate your overall experience with GameHub?</label>
+                        <div class="rating-stars" id="overallRating">
+                            <div class="star" data-value="1">★</div>
+                            <div class="star" data-value="2">★</div>
+                            <div class="star" data-value="3">★</div>
+                            <div class="star" data-value="4">★</div>
+                            <div class="star" data-value="5">★</div>
+                        </div>
+                        <input type="hidden" id="rating" name="rating">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">What features do you use most on GameHub? (Select all that apply)</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="featureReviews" name="features" value="reviews">
+                            <label class="form-check-label" for="featureReviews">
+                                Game Reviews & Ratings
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="featureGallery" name="features" value="gallery">
+                            <label class="form-check-label" for="featureGallery">
+                                Game Screenshot Gallery
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="featureShop" name="features" value="shop">
+                            <label class="form-check-label" for="featureShop">
+                                Accessories Shop
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="featureCommunity" name="features" value="community">
+                            <label class="form-check-label" for="featureCommunity">
+                                Community Comments
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="featureNews" name="features" value="news">
+                            <label class="form-check-label" for="featureNews">
+                                Gaming News
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">How likely are you to recommend GameHub to other gamers?</label>
+                        <div class="slider-container">
+                            <input type="range" class="range-slider" id="recommendScore" min="0" max="10" value="5">
+                            <div class="d-flex justify-content-between mt-2">
+                                <span>Not likely</span>
+                                <span id="recommendValue">5</span>
+                                <span>Very likely</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="survey-section" id="section3">
+                <div class="question-counter">SECTION 3/5</div>
+                <h3 class="cyber-font mb-4">📱 Content & Features</h3>
+                
+                <div class="survey-card">
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">What type of content would you like to see more of?</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="contentReviews" name="content" value="in-depth-reviews">
+                            <label class="form-check-label" for="contentReviews">
+                                In-depth game reviews
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="contentGuides" name="content" value="guides">
+                            <label class="form-check-label" for="contentGuides">
+                                Game guides & walkthroughs
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="contentNews" name="content" value="news">
+                            <label class="form-check-label" for="contentNews">
+                                Breaking gaming news
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="contentHardware" name="content" value="hardware">
+                            <label class="form-check-label" for="contentHardware">
+                                Hardware & accessory reviews
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="contentVideos" name="content" value="videos">
+                            <label class="form-check-label" for="contentVideos">
+                                Video content & streams
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="contentEvents" name="content" value="events">
+                            <label class="form-check-label" for="contentEvents">
+                                Esports & gaming events coverage
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">How important are the following features to you?</label>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">User Reviews & Ratings</label>
+                            <div class="rating-stars feature-rating" data-feature="reviews">
+                                <div class="star" data-value="1">★</div>
+                                <div class="star" data-value="2">★</div>
+                                <div class="star" data-value="3">★</div>
+                                <div class="star" data-value="4">★</div>
+                                <div class="star" data-value="5">★</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Community Forums/Discussions</label>
+                            <div class="rating-stars feature-rating" data-feature="community">
+                                <div class="star" data-value="1">★</div>
+                                <div class="star" data-value="2">★</div>
+                                <div class="star" data-value="3">★</div>
+                                <div class="star" data-value="4">★</div>
+                                <div class="star" data-value="5">★</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Game Price Tracking</label>
+                            <div class="rating-stars feature-rating" data-feature="pricing">
+                                <div class="star" data-value="1">★</div>
+                                <div class="star" data-value="2">★</div>
+                                <div class="star" data-value="3">★</div>
+                                <div class="star" data-value="4">★</div>
+                                <div class="star" data-value="5">★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="survey-section" id="section4">
+                <div class="question-counter">SECTION 4/5</div>
+                <h3 class="cyber-font mb-4">🚀 Future Improvements</h3>
+                
+                <div class="survey-card">
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">What would make you visit GameHub more frequently?</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="improveMobile" name="improvements" value="mobile-app">
+                            <label class="form-check-label" for="improveMobile">
+                                Mobile app version
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="improveSocial" name="improvements" value="social-features">
+                            <label class="form-check-label" for="improveSocial">
+                                Social features (friends, groups)
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="improvePersonal" name="improvements" value="personalization">
+                            <label class="form-check-label" for="improvePersonal">
+                                Personalized game recommendations
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="improveDeals" name="improvements" value="deals">
+                            <label class="form-check-label" for="improveDeals">
+                                Game deals & discounts alerts
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input-cyber" type="checkbox" id="improveStream" name="improvements" value="streaming">
+                            <label class="form-check-label" for="improveStream">
+                                Live streaming integration
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label h5 mb-3">Would you be interested in a GameHub mobile app?</label>
+                        <div class="form-check">
+                            <input class="form-check-input-cyber" type="radio" name="mobileApp" id="mobileYes" value="yes">
+                            <label class="form-check-label" for="mobileYes">
+                                Yes, definitely
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input-cyber" type="radio" name="mobileApp" id="mobileMaybe" value="maybe">
+                            <label class="form-check-label" for="mobileMaybe">
+                                Maybe, depending on features
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input-cyber" type="radio" name="mobileApp" id="mobileNo" value="no">
+                            <label class="form-check-label" for="mobileNo">
+                                No, I prefer the website
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="suggestions" class="form-label h5 mb-3">Any other suggestions or feedback for GameHub?</label>
+                        <textarea class="form-control-cyber" id="suggestions" name="suggestions" rows="4" placeholder="Tell us what you think..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="survey-section" id="section5">
+                <div class="question-counter">SECTION 5/5</div>
+                <h3 class="cyber-font mb-4">👤 Optional Information</h3>
+                
+                <div class="survey-card">
+                    <p class="text-secondary mb-4">This section is optional. Your information will only be used for survey analysis and will not be shared with third parties.</p>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email Address (Optional)</label>
+                            <input type="email" class="form-control-cyber" id="email" name="email" placeholder="your.email@example.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="age" class="form-label">Age Group (Optional)</label>
+                            <select class="form-control-cyber" id="age" name="age">
+                                <option value="">Select age group</option>
+                                <option value="under18">Under 18</option>
+                                <option value="18-24">18-24</option>
+                                <option value="25-34">25-34</option>
+                                <option value="35-44">35-44</option>
+                                <option value="45-54">45-54</option>
+                                <option value="55plus">55+</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="country" class="form-label">Country (Optional)</label>
+                        <input type="text" class="form-control-cyber" id="country" name="country" placeholder="Your country">
+                    </div>
+                    
+                    <div class="form-check mb-4">
+                        <input class="form-check-input-cyber" type="checkbox" id="newsletter" name="newsletter">
+                        <label class="form-check-label" for="newsletter">
+                            Sign up for GameHub newsletter (game updates, reviews, and special offers)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center py-5">
+                <button type="submit" class="submit-btn cyber-font mb-3">
+                    <i class="fas fa-paper-plane me-2"></i>SUBMIT SURVEY
+                </button>
+                <p class="text-secondary">By submitting, you agree to our <a href="privacy.html" class="text-decoration-none" style="color: var(--neon-blue);">Privacy Policy</a></p>
+            </div>
+        </form>
+    </main>
+
+    <footer class="pt-5 pb-4 mt-5" style="background: rgba(10, 10, 15, 0.95); border-top: 2px solid rgba(0, 243, 255, 0.3);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub Survey</h4>
+                    <p class="text-secondary">Your feedback helps us improve.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="privacy.html" class="text-secondary text-decoration-none me-3">Privacy Policy</a>
+                        <a href="contact.html" class="text-secondary text-decoration-none">Contact</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSurvey();
+        });
+
+        function initializeSurvey() {
+            const platformTags = document.querySelectorAll('.platform-tag');
+            const platformsInput = document.getElementById('platforms');
+            let selectedPlatforms = [];
+            
+            platformTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const platform = this.getAttribute('data-platform');
+                    const index = selectedPlatforms.indexOf(platform);
+                    
+                    if (index > -1) {
+                        selectedPlatforms.splice(index, 1);
+                        this.classList.remove('selected');
+                    } else {
+                        selectedPlatforms.push(platform);
+                        this.classList.add('selected');
+                    }
+                    
+                    platformsInput.value = selectedPlatforms.join(',');
+                    updateProgress();
+                });
+            });
+
+            const hoursSlider = document.getElementById('hoursPerWeek');
+            const hoursValue = document.getElementById('hoursValue');
+            
+            hoursSlider.addEventListener('input', function() {
+                hoursValue.textContent = `${this.value} hours`;
+                updateProgress();
+            });
+
+            const ratingStars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('rating');
+            
+            ratingStars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    ratingInput.value = value;
+                    
+                    ratingStars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-value')) <= value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                    updateProgress();
+                });
+            });
+
+            const featureRatings = document.querySelectorAll('.feature-rating');
+            featureRatings.forEach(ratingGroup => {
+                const stars = ratingGroup.querySelectorAll('.star');
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = parseInt(this.getAttribute('data-value'));
+                        const feature = ratingGroup.getAttribute('data-feature');
+                        
+                        stars.forEach(s => {
+                            if (parseInt(s.getAttribute('data-value')) <= value) {
+                                s.classList.add('active');
+                            } else {
+                                s.classList.remove('active');
+                            }
+                        });
+                        
+                        ratingGroup.setAttribute('data-rating', value);
+                        updateProgress();
+                    });
+                });
+            });
+
+            const recommendSlider = document.getElementById('recommendScore');
+            const recommendValue = document.getElementById('recommendValue');
+            
+            recommendSlider.addEventListener('input', function() {
+                recommendValue.textContent = this.value;
+                updateProgress();
+            });
+
+            const surveyForm = document.getElementById('surveyForm');
+            
+            surveyForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!ratingInput.value) {
+                    showNotification('Please provide an overall rating for GameHub', 'warning');
+                    document.getElementById('section2').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+                
+                if (!platformsInput.value) {
+                    showNotification('Please select at least one gaming platform', 'warning');
+                    document.getElementById('section1').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+                
+                const formData = {
+                    platforms: selectedPlatforms,
+                    hoursPerWeek: hoursSlider.value,
+                    primaryGenre: document.getElementById('primaryGenre').value,
+                    overallRating: ratingInput.value,
+                    features: Array.from(document.querySelectorAll('input[name="features"]:checked')).map(cb => cb.value),
+                    recommendScore: recommendSlider.value,
+                    content: Array.from(document.querySelectorAll('input[name="content"]:checked')).map(cb => cb.value),
+                    improvements: Array.from(document.querySelectorAll('input[name="improvements"]:checked')).map(cb => cb.value),
+                    mobileApp: document.querySelector('input[name="mobileApp"]:checked')?.value,
+                    suggestions: document.getElementById('suggestions').value,
+                    email: document.getElementById('email').value,
+                    age: document.getElementById('age').value,
+                    country: document.getElementById('country').value,
+                    newsletter: document.getElementById('newsletter').checked
+                };
+                
+                const featureRatingsData = {};
+                featureRatings.forEach(ratingGroup => {
+                    const feature = ratingGroup.getAttribute('data-feature');
+                    const rating = ratingGroup.getAttribute('data-rating') || 0;
+                    featureRatingsData[feature] = rating;
+                });
+                formData.featureRatings = featureRatingsData;
+                
+                console.log('Survey submitted:', formData);
+                
+                showNotification('Thank you for completing the survey! Your feedback is valuable to us.', 'success');
+                
+                setTimeout(() => {
+                    surveyForm.reset();
+                    resetSurveyUI();
+                    document.getElementById('progressBar').style.width = '0%';
+                    document.getElementById('progressPercent').textContent = '0%';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 3000);
+            });
+
+            function updateProgress() {
+                let filledSections = 0;
+                const sections = [
+                    { 
+                        check: () => selectedPlatforms.length > 0 && hoursSlider.value > 0 && document.getElementById('primaryGenre').value 
+                    },
+                    { 
+                        check: () => ratingInput.value && document.querySelectorAll('input[name="features"]:checked').length > 0
+                    },
+                    { 
+                        check: () => document.querySelectorAll('input[name="content"]:checked').length > 0
+                    },
+                    { 
+                        check: () => document.querySelector('input[name="mobileApp"]:checked') && 
+                                 document.querySelectorAll('input[name="improvements"]:checked').length > 0
+                    },
+                    { 
+                        check: () => true 
+                    }
+                ];
+                
+                sections.forEach(section => {
+                    if (section.check()) filledSections++;
+                });
+                
+                const progress = (filledSections / sections.length) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+                document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+            }
+
+            function resetSurveyUI() {
+                platformTags.forEach(tag => tag.classList.remove('selected'));
+                selectedPlatforms = [];
+                platformsInput.value = '';
+                
+                ratingStars.forEach(star => star.classList.remove('active'));
+                ratingInput.value = '';
+                
+                featureRatings.forEach(ratingGroup => {
+                    ratingGroup.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+                    ratingGroup.removeAttribute('data-rating');
+                });
+                
+                hoursSlider.value = 10;
+                hoursValue.textContent = '10 hours';
+                recommendSlider.value = 5;
+                recommendValue.textContent = '5';
+            }
+
+            const allInputs = surveyForm.querySelectorAll('input, select, textarea');
+            allInputs.forEach(input => {
+                input.addEventListener('change', updateProgress);
+                input.addEventListener('input', updateProgress);
+            });
+        }
+
+        function showNotification(message, type) {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            let borderColor = '#28a745'; 
+            if (type === 'warning') borderColor = '#ffc107';
+            if (type === 'info') borderColor = '#17a2b8';
+            if (type === 'error') borderColor = '#dc3545';
+            
+            notification.style.borderColor = borderColor;
+            notification.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>
+                    <strong>${message}</strong>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

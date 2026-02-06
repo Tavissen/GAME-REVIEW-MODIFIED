@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | About Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(185, 103, 255, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-header {
+            padding: 160px 0 60px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border-bottom: 2px solid var(--neon-blue);
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .about-section {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mission-card {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .team-card {
+            background: rgba(19, 19, 32, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .team-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+        }
+        
+        .team-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .value-card {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(185, 103, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-3px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .stats-card {
+            background: rgba(255, 42, 109, 0.1);
+            border: 2px solid var(--neon-pink);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--neon-pink);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .timeline-date {
+            color: var(--neon-purple);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-info {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+            margin-left: 10px;
+        }
+        
+        .login-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="accessories.html">Accessories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active cyber-font" href="about.html">About</a>
+                    </li>
+                </ul>
+                <div>
+                    <a href="login.html" class="btn login-btn cyber-font">
+                        <i class="fas fa-user me-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="about-header">
+        <div class="container text-center">
+            <h1 class="cyber-font display-4 mb-3">About GameHub</h1>
+            <p class="lead mb-4">Your trusted source for honest game reviews and gaming community</p>
+            <a href="#our-story" class="btn cyber-btn">
+                <i class="fas fa-arrow-down me-2"></i>Our Story
+            </a>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <section class="mission-card animate-in">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 class="cyber-font mb-3">Our Mission</h2>
+                    <p class="lead">To provide gamers with honest, unbiased reviews and create the ultimate gaming community where every player can find their next favorite game.</p>
+                    <p>We believe in transparency, integrity, and the power of community-driven insights. GameHub was built by gamers, for gamers.</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fas fa-gamepad" style="font-size: 6rem; color: var(--neon-blue);"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section animate-in" id="our-story" style="animation-delay: 0.1s">
+            <h2 class="cyber-font mb-4">Our Story</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p>Founded in 2020 by a group of passionate gamers, GameHub started as a small blog reviewing indie games. What began as a hobby quickly grew into a full-fledged platform as more gamers joined our community seeking honest reviews.</p>
+                    <p>Today, GameHub is one of the most trusted gaming review platforms with over 500,000 active members and partnerships with major game developers and publishers.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2020</div>
+                            <h5>GameHub Founded</h5>
+                            <p>Started as a small blog reviewing indie games</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2021</div>
+                            <h5>Community Platform Launched</h5>
+                            <p>Introduced user reviews and community features</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022</div>
+                            <h5>Accessories Shop Added</h5>
+                            <p>Expanded to offer gaming accessories and gear</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023</div>
+                            <h5>500K Members Milestone</h5>
+                            <p>Reached half a million active community members</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section animate-in" style="animation-delay: 0.2s">
+            <h2 class="cyber-font mb-4 text-center">Our Values</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Honesty</h4>
+                        <p>We provide unbiased reviews without influence from game publishers or advertisers.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Community</h4>
+                        <p>Our platform is built by and for gamers. Every voice matters in our community.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>Innovation</h4>
+                        <p>We continuously improve our platform with new features and better user experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section animate-in" style="animation-delay: 0.3s">
+            <h2 class="cyber-font mb-4 text-center">By The Numbers</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stat-number">500K+</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stat-number">2.5K+</div>
+                        <div class="stat-label">Game Reviews</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">User Satisfaction</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Expert Reviewers</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section animate-in" style="animation-delay: 0.4s">
+            <h2 class="cyber-font mb-4 text-center">Meet The Team</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Alex Johnson" class="team-img">
+                        <h4>Alex Johnson</h4>
+                        <p class="text-secondary">Founder & CEO</p>
+                        <p>Former game developer with 15+ years in the industry</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w-400&q=80" 
+                             alt="Sarah Chen" class="team-img">
+                        <h4>Sarah Chen</h4>
+                        <p class="text-secondary">Lead Reviewer</p>
+                        <p>Gaming journalist with expertise in RPGs and story-driven games</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Mike Rivera" class="team-img">
+                        <h4>Mike Rivera</h4>
+                        <p class="text-secondary">Community Manager</p>
+                        <p>Esports tournament organizer and community builder</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section animate-in" style="animation-delay: 0.5s">
+            <h2 class="cyber-font mb-4">Get In Touch</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-3">Contact Information</h5>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope me-2"></i>
+                        <strong>Email:</strong> support@gamehub.com
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone me-2"></i>
+                        <strong>Phone:</strong> +1 (555) 123-4567
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <strong>Address:</strong> 123 Gaming Street, Tech City, TC 10101
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-3">Business Hours</h5>
+                    <div class="contact-info">
+                        <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+                        <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM</p>
+                        <p><strong>Sunday:</strong> Closed</p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="contact.html" class="btn cyber-btn me-3">Contact Us</a>
+                        <a href="help.html" class="btn cyber-btn">Get Help</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pt-5 pb-4 mt-5" style="background: rgba(10, 10, 15, 0.95); border-top: 2px solid rgba(0, 243, 255, 0.3);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="cyber-font mb-3">GameHub</h4>
+                    <p class="text-secondary">Your ultimate destination for honest game reviews and insights.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 GameHub. All rights reserved.</p>
+                    <p>
+                        <a href="about.html" class="text-secondary text-decoration-none me-3">About</a>
+                        <a href="help.html" class="text-secondary text-decoration-none me-3">Help</a>
+                        <a href="contact.html" class="text-secondary text-decoration-none me-3">Contact</a>
+                        <a href="privacy.html" class="text-secondary text-decoration-none">Privacy</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 50, density: { enable: true, value_area: 800 } },
+                color: { value: "#00f3ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#b967ff",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate-in');
+            animatedElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * (index + 1));
+            });
+        });
+    </script>
+</body>
+</html>

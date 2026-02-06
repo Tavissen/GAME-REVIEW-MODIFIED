@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --card-bg: #131320;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+            transition: all 0.4s ease;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all 0.4s ease;
+        }
+        
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .cyber-nav {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+            padding: 1rem 0;
+            transition: all 0.4s ease;
+        }
+        
+        .nav-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+        }
+        
+        .cyber-hero {
+            padding: 180px 0 50px;
+        }
+        
+        .cyber-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+        }
+        
+        .form-label {
+            color: var(--neon-blue);
+            font-weight: 600;
+        }
+        
+        .form-control, .form-select {
+            background: rgba(19, 19, 32, 0.8);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 10px;
+            transition: all 0.4s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background: rgba(19, 19, 32, 0.9);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            color: var(--text-primary);
+        }
+        
+        .cyber-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.75rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+        }
+        
+        .cyber-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        .settings-btn {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: 2px solid transparent;
+            color: white;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+            border-radius: 0;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .settings-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 42, 109, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .settings-btn:hover::before {
+            left: 100%;
+        }
+        
+        .settings-btn:hover {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink), 0 0 60px rgba(255, 42, 109, 0.3);
+            transform: translateY(-3px) rotate(90deg);
+        }
+        
+        .settings-btn i {
+            font-size: 1.2rem;
+            transition: transform 0.5s ease;
+        }
+        
+        .settings-btn:hover i {
+            transform: scale(1.2) rotate(180deg);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .theme-switcher {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .theme-option {
+            flex: 1;
+            min-width: 120px;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .theme-option:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+        }
+        
+        .theme-option.active {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.3);
+        }
+        
+        .theme-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin: 0 auto 10px;
+            background: var(--dark-bg);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+        }
+        
+        .theme-option[data-theme="light"] .theme-preview {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .theme-option[data-theme="retro"] .theme-preview {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            border-color: #ff6b6b;
+        }
+        
+        body.light-mode {
+            --dark-bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --neon-blue: #007bff;
+            --neon-purple: #6f42c1;
+            --neon-pink: #e83e8c;
+        }
+        
+        body.light-mode .cyber-nav {
+            background: rgba(248, 249, 250, 0.95);
+            border-bottom: 2px solid rgba(0, 123, 255, 0.3);
+        }
+        
+        body.light-mode .cyber-card {
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .form-control,
+        body.light-mode .form-select {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(0, 123, 255, 0.3);
+            color: #212529;
+        }
+        
+        body.retro-mode {
+            --dark-bg: #0f0f23;
+            --card-bg: #1a1a2e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+            --neon-blue: #00ff00;
+            --neon-purple: #ff6b6b;
+            --neon-pink: #ffd166;
+        }
+        
+        body.retro-mode .cyber-nav {
+            background: rgba(15, 15, 35, 0.95);
+            border-bottom: 2px solid #00ff00;
+        }
+        
+        body.retro-mode .cyber-card {
+            border: 1px solid #ff6b6b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+        }
+        
+        body.retro-mode .form-control,
+        body.retro-mode .form-select {
+            background: rgba(26, 26, 46, 0.9);
+            border: 2px solid #00ff00;
+            color: #ffffff;
+        }
+        
+        .color-preview {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            margin-top: 5px;
+        }
+        
+        .color-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .theme-option {
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg cyber-nav">
+        <div class="container">
+            <a class="navbar-brand nav-brand cyber-font" href="index.html">GameHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="cyberNav">
+                <ul class="navbar-nav me-auto ms-4">
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="reviews.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cyber-font" href="gallery.html">Gallery</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="settings.html" class="btn settings-btn cyber-font me-3" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                    <a href="login.html" class="btn cyber-btn cyber-font">
+                        <i class="fas fa-user me-2"></i>Login/Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cyber-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-title text-center">
+                        <h2 class="cyber-font">Settings</h2>
+                        <p class="text-secondary">Customize your GameHub experience</p>
+                    </div>
+                    
+                    <div class="cyber-card">
+                        <h4 class="cyber-font mb-4"><i class="fas fa-user me-2"></i>Account Settings</h4>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control" value="PlayerOne" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" value="player@example.com">
+                            </div>
+                        </div>
+                        <button class="btn cyber-btn" id="updateAccountBtn">Update Account</button>
+                    </div>
+                    
+                    <div class="cyber-card">
+                        <h4 class="cyber-font mb-4"><i class="fas fa-palette me-2"></i>Appearance Settings</h4>
+                        
+                        <div class="mb-4">
+                            <label class="form-label mb-3 d-block">Select Theme</label>
+                            <div class="theme-switcher">
+                                <div class="theme-option active" data-theme="cyber" id="cyberTheme">
+                                    <div class="theme-preview">
+                                        <div class="color-preview">
+                                            <div class="color-dot" style="background: #00f3ff;"></div>
+                                            <div class="color-dot" style="background: #b967ff;"></div>
+                                            <div class="color-dot" style="background: #ff2a6d;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="theme-name cyber-font">Cyber Neon</div>
+                                    <small class="text-secondary">Default</small>
+                                </div>
+                                
+                                <div class="theme-option" data-theme="light" id="lightTheme">
+                                    <div class="theme-preview">
+                                        <div class="color-preview">
+                                            <div class="color-dot" style="background: #007bff;"></div>
+                                            <div class="color-dot" style="background: #6f42c1;"></div>
+                                            <div class="color-dot" style="background: #e83e8c;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="theme-name cyber-font">Light Mode</div>
+                                    <small class="text-secondary">Clean & Bright</small>
+                                </div>
+                                
+                                <div class="theme-option" data-theme="retro" id="retroTheme">
+                                    <div class="theme-preview">
+                                        <div class="color-preview">
+                                            <div class="color-dot" style="background: #00ff00;"></div>
+                                            <div class="color-dot" style="background: #ff6b6b;"></div>
+                                            <div class="color-dot" style="background: #ffd166;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="theme-name cyber-font">Retro Gaming</div>
+                                    <small class="text-secondary">Old-school</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Accent Color</label>
+                            <div class="d-flex gap-3 mb-3">
+                                <div class="color-option" data-color="blue">
+                                    <div class="color-circle" style="background: #00f3ff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.3);"></div>
+                                    <small>Blue</small>
+                                </div>
+                                <div class="color-option" data-color="purple">
+                                    <div class="color-circle" style="background: #b967ff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.3);"></div>
+                                    <small>Purple</small>
+                                </div>
+                                <div class="color-option" data-color="pink">
+                                    <div class="color-circle" style="background: #ff2a6d; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.3);"></div>
+                                    <small>Pink</small>
+                                </div>
+                                <div class="color-option" data-color="green">
+                                    <div class="color-circle" style="background: #00ff9d; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.3);"></div>
+                                    <small>Green</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">UI Effects</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="animations" checked>
+                                <label class="form-check-label" for="animations">Enable animations</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="glowEffects" checked>
+                                <label class="form-check-label" for="glowEffects">Enable glow effects</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="particles">
+                                <label class="form-check-label" for="particles">Show background particles</label>
+                            </div>
+                        </div>
+                        
+                        <button class="btn cyber-btn" id="saveAppearanceBtn">Save Appearance Settings</button>
+                    </div>
+                    
+                    <div class="cyber-card">
+                        <h4 class="cyber-font mb-4"><i class="fas fa-bell me-2"></i>Notifications</h4>
+                        <div class="mb-3">
+                            <label class="form-label">Notification Preferences</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notifications" checked>
+                                <label class="form-check-label" for="notifications">Enable notifications</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="emailAlerts">
+                                <label class="form-check-label" for="emailAlerts">Email alerts for new reviews</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="gameUpdates" checked>
+                                <label class="form-check-label" for="gameUpdates">Game update notifications</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="newsletter">
+                                <label class="form-check-label" for="newsletter">Weekly newsletter</label>
+                            </div>
+                        </div>
+                        <button class="btn cyber-btn" id="saveNotificationsBtn">Save Notification Settings</button>
+                    </div>
+                    
+                    <div class="cyber-card">
+                        <h4 class="cyber-font mb-4"><i class="fas fa-gamepad me-2"></i>Game Preferences</h4>
+                        <div class="mb-3">
+                            <label class="form-label">Favorite Genres</label>
+                            <select class="form-select" multiple id="favoriteGenres">
+                                <option selected>RPG</option>
+                                <option selected>Action</option>
+                                <option>Adventure</option>
+                                <option>Strategy</option>
+                                <option>Sports</option>
+                                <option>Indie</option>
+                                <option>Racing</option>
+                                <option>Simulation</option>
+                            </select>
+                            <div class="form-text">Hold Ctrl/Cmd to select multiple genres</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Preferred Platforms</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="platformPC" checked>
+                                <label class="form-check-label" for="platformPC">PC</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="platformPS5" checked>
+                                <label class="form-check-label" for="platformPS5">PlayStation 5</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="platformXbox">
+                                <label class="form-check-label" for="platformXbox">Xbox Series X</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="platformSwitch">
+                                <label class="form-check-label" for="platformSwitch">Nintendo Switch</label>
+                            </div>
+                        </div>
+                        <button class="btn cyber-btn" id="saveGamePrefsBtn">Save Game Preferences</button>
+                    </div>
+                    
+                    <div class="cyber-card">
+                        <h4 class="cyber-font mb-4"><i class="fas fa-shield-alt me-2"></i>Privacy & Security</h4>
+                        <div class="mb-3">
+                            <label class="form-label">Profile Visibility</label>
+                            <select class="form-select" id="profileVisibility">
+                                <option selected>Public</option>
+                                <option>Friends Only</option>
+                                <option>Private</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Two-Factor Authentication</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="twoFactor">
+                                <label class="form-check-label" for="twoFactor">Enable 2FA</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Data Privacy</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="dataCollection" checked>
+                                <label class="form-check-label" for="dataCollection">Allow anonymous data collection</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="personalizedAds">
+                                <label class="form-check-label" for="personalizedAds">Personalized advertisements</label>
+                            </div>
+                        </div>
+                        <button class="btn cyber-btn" id="savePrivacyBtn">Update Privacy Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('gamehub-theme') || 'cyber';
+            setTheme(savedTheme);
+            
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === savedTheme) {
+                    option.classList.add('active');
+                }
+            });
+            
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const theme = this.dataset.theme;
+                    
+                    document.querySelectorAll('.theme-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    setTheme(theme);
+                    
+                    localStorage.setItem('gamehub-theme', theme);
+                    
+                    showNotification('Theme changed to ' + theme + ' mode!');
+                });
+            });
+            
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const color = this.dataset.color;
+                    applyAccentColor(color);
+                    localStorage.setItem('gamehub-accent', color);
+                    showNotification('Accent color changed to ' + color);
+                });
+            });
+            
+            const savedAccent = localStorage.getItem('gamehub-accent');
+            if (savedAccent) {
+                applyAccentColor(savedAccent);
+            }
+            
+            document.querySelectorAll('.cyber-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                        this.style.background = 'var(--neon-purple)';
+                        this.style.color = 'white';
+                        this.style.borderColor = 'var(--neon-purple)';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.style.background = '';
+                            this.style.color = '';
+                            this.style.borderColor = '';
+                        }, 1500);
+                    }, 1000);
+                });
+            });
+        });
+        
+        function setTheme(theme) {
+            document.body.classList.remove('light-mode', 'retro-mode');
+            
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+            } else if (theme === 'retro') {
+                document.body.classList.add('retro-mode');
+            }
+        }
+        
+        function applyAccentColor(color) {
+            let newBlue, newPurple, newPink;
+            
+            switch(color) {
+                case 'blue':
+                    newBlue = '#00f3ff';
+                    newPurple = '#007bff';
+                    newPink = '#0056b3';
+                    break;
+                case 'purple':
+                    newBlue = '#b967ff';
+                    newPurple = '#9c27b0';
+                    newPink = '#7b1fa2';
+                    break;
+                case 'pink':
+                    newBlue = '#ff2a6d';
+                    newPurple = '#e91e63';
+                    newPink = '#c2185b';
+                    break;
+                case 'green':
+                    newBlue = '#00ff9d';
+                    newPurple = '#00b87a';
+                    newPink = '#009664';
+                    break;
+                default:
+                    newBlue = '#00f3ff';
+                    newPurple = '#b967ff';
+                    newPink = '#ff2a6d';
+            }
+            
+            document.documentElement.style.setProperty('--neon-blue', newBlue);
+            document.documentElement.style.setProperty('--neon-purple', newPurple);
+            document.documentElement.style.setProperty('--neon-pink', newPink);
+        }
+        
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div style="position: fixed; top: 20px; right: 20px; background: var(--card-bg); color: var(--text-primary); padding: 1rem 1.5rem; border-radius: 10px; border-left: 4px solid var(--neon-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 9999; max-width: 300px; animation: slideIn 0.3s ease;">
+                    <i class="fas fa-check-circle me-2" style="color: var(--neon-blue);"></i>
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            setTimeout(() => {
+                notification.firstChild.style.animation = 'fadeOut 0.5s ease';
+                setTimeout(() => {
+                    notification.remove();
+                    style.remove();
+                }, 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
